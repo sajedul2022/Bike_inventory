@@ -306,7 +306,7 @@
                                 clip-rule="evenodd"></path>
                         </svg></span>
                 </span>
-                <div class="multi-level collapse {{ Request::segment(1) == 'customers' || Request::segment(1) == 'products' || Request::segment(1) == 'products2' || Request::segment(1) == 'products3' || Request::segment(1) == 'products4' ? 'show' : '' }}"
+                <div class="multi-level collapse {{ Request::segment(1) == 'customers' || Request::segment(1) == 'customers.index' || Request::segment(1) == 'products2' || Request::segment(1) == 'products3' || Request::segment(1) == 'products4' ? 'show' : '' }}"
                     role="list" id="submenu-customers" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'customers' ? 'active' : '' }}">
@@ -316,8 +316,8 @@
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products">
+                        <li class="nav-item {{ Request::segment(1) == 'customers2' ? 'active' : '' }}">
+                            <a class="nav-link" href="/customers2">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Manage Customer </span>
@@ -349,18 +349,18 @@
                                 clip-rule="evenodd"></path>
                         </svg></span>
                 </span>
-                <div class="multi-level collapse {{ Request::segment(1) == 'customers' || Request::segment(1) == 'products' || Request::segment(1) == 'products2' || Request::segment(1) == 'products3' || Request::segment(1) == 'products4' ? 'show' : '' }}"
+                <div class="multi-level collapse {{ Request::segment(1) == 'suppliers' || Request::segment(1) == 'suppliers.index' || Request::segment(1) == 'products2' || Request::segment(1) == 'products3' || Request::segment(1) == 'products4' ? 'show' : '' }}"
                     role="list" id="submenu-supplier" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::segment(1) == 'customers' ? 'active' : '' }}">
-                            <a class="nav-link" href="/customers">
+                        <li class="nav-item {{ Request::segment(1) == 'suppliers' ? 'active' : '' }}">
+                            <a class="nav-link" href="/suppliers">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Supplier </span>
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products">
+                        <li class="nav-item {{ Request::segment(1) == 'suppliers2' ? 'active' : '' }}">
+                            <a class="nav-link" href="/suppliers2">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Manage Supplier </span>

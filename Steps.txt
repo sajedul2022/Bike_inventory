@@ -1,10 +1,10 @@
-
-01. Multi Auth
-https://laraveltuts.com/laravel-9-user-roles-and-permissions-tutorial-example/
-
 php artisan migrate:fresh --seed
 php artisan db:seed --class=PermissionTableSeeder
 php artisan db:seed --class=CreateAdminUserSeeder
+
+
+01. Multi Auth
+https://laraveltuts.com/laravel-9-user-roles-and-permissions-tutorial-example/
 
 02. Category.Sub Category, Sub Sub Category
 
@@ -12,3 +12,8 @@ Category: https://lukasmarkevicius.com/blog/how-to-create-categories-and-subcate
 
 Sub Sub Category: https://91techsquare.com/how-to-create-multilevel-category-and-subcategory-in-laravel/
 
+
+================================================== Task ==============================
+
+1. Seperate Category and Product
+2. Organization Profile table mcr [org_name, email, phone, address, image]

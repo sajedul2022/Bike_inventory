@@ -15,7 +15,7 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'category_id', 'name', 'detail'
+        'category_id', 'auth_id', 'product_code', 'name', 'manufacturer', 'measurement_unit', 'detail', 'image', 'model', 'color', 'chassis_number', 'engine_number', 'cubic_capacity', 'reg_number', 'reg_date', 'product_status'
     ];
 
     public function user() {

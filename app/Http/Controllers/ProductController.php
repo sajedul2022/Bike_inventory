@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
 {
@@ -42,7 +45,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-
         $categories = Category::where('parent_id', null)->orderby('name', 'asc')->get();
         return view('products.create', compact('categories'));
     }
@@ -56,34 +58,55 @@ class ProductController extends Controller
     public function store(Request $request)
     {
 
-        $validatedData = $this->validate($request, [
-            'name' => 'required',
-            'detail' => 'required',
-            'category_id'   => 'required|numeric',
+        $request->validate([
+            'name'=>'required',
+            'category_id'=>'required',
+            // 'image'=>'mimes:jpeg,png,jpg,giv,svg|max:2048',
         ]);
 
-        $validatedData['user_id'] = Auth::id();
-
-        $Product = Product::create($validatedData);
-
-        return redirect()->route('products.index')
-            ->with('success', 'Question created successfully.');
-
-        // $request->validate([
-        //     'category_id' => 'required',
+        // $validator = Validator([
         //     'name' => 'required',
-        //     'detail' => 'required',
-        //     'question_text' => 'required',
-        //     // 'image' => 'required|image|mimes:jpeg,png,jpg,giv,svg|max:2048',
+        //     'category_id' => 'required',
+        //     'image' => 'mimes:jpeg,png,jpg,giv,svg|max:2048',
         // ]);
 
-        // $input = $request->all();
-        // Question::create($input);
+        // $input=$request->all();
 
-        // return redirect()->route('questions.index')->with([
-        //     'message' => 'successfully created !',
-        //     'alert-type' => 'success'
-        // ]);
+        $input['auth_id'] = Auth::id();
+        $input['product_code'] = rand(100, 100000);
+        $input['category_id'] = $request->category_id;
+        $input['name'] = $request->name;
+        $input['manufacturer'] = $request->manufacturer;
+        $input['measurement_unit'] = $request->measurement_unit;
+        $input['detail'] = $request->detail;
+        // $input['image'] = $image;
+        $input['model'] =  $request->model;
+        $input['color'] =  $request->color;
+        $input['chassis_number'] =  $request->chassis_number;
+        $input['engine_number'] = $request->engine_number;
+        $input['cubic_capacity'] = $request->cubic_capacity;
+        $input['reg_number'] = $request->reg_number;
+        $input['reg_date'] = $request->reg_date;
+        $input['product_status'] = 1;
+
+        if ($image = $request->file('image')) {
+            $destinationPath = "images/";
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        }
+
+        Product::create($input);
+
+        return redirect()->route('products.index')->withInput()
+                ->with('success', ' created successfully.');
+
+        // if ($validator->fails()) {
+        //     return back()->withInput()->withErrors($validator);
+        // } else {
+        //     return redirect()->route('products.index')
+        //         ->with('success', ' created successfully.');
+        // }
     }
 
     /**
@@ -124,15 +147,28 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        request()->validate([
+
+        $request->validate([
             'name' => 'required',
-            'detail' => 'required',
+            'category_id' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,giv,svg|max:2048',
         ]);
 
-        $product->update($request->all());
+        $input = $request->all();
+
+        if ($image = $request->file('image')) {
+            $destinationPath = 'images/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['image'] = "$profileImage";
+        } else {
+            unset($input['image']);
+        }
+
+        $product->update($input);
 
         return redirect()->route('products.index')
-            ->with('success', 'Question updated successfully');
+            ->with('success', 'Updated successfully');
     }
 
     /**
@@ -146,6 +182,6 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')
-            ->with('success', 'Question deleted successfully');
+            ->with('success', ' deleted successfully');
     }
 }

@@ -4,11 +4,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>All Products </h2>
+                <h2>All Customers </h2>
             </div>
             <div class="pull-right">
                 @can('product-create')
-                <a class="btn btn-success" href="{{ route('products.create') }}">  New Products </a>
+                <a class="btn btn-success" href="{{ route('customers.create') }}">  New Customers </a>
                 @endcan
             </div>
         </div>
@@ -21,28 +21,27 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Products</th>
-            <th>Measurement Unit:</th>
-            <th> Image </th>
+            <th>Customers Name</th>
+            <th>Phone:</th>
+            <th> Address </th>
             <th width="280px">Action</th>
         </tr>
-        @foreach ($products as $product)
+        @foreach ($customers as $customer)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $product->name }}</td>
-            <td>{{ $product->measurement_unit }}</td>
-            <td><img src="/images/{{ $product->image }}" width="80px"></td>
-            {{-- <p class="text-muted">{{ $product->category ? $product->category->name : 'Uncategorized' }}</p> --}}
+            <td>{{ $customer->customer_name }}</td>
+            <td>{{ $customer->phone }}</td>
+            <td>{{ $customer->address }}</td>
             <td>
-                <form action="{{ route('products.destroy',$product->id) }}" method="POST">
+                <form action="{{ route('customers.destroy',$customer->id) }}" method="POST">
                     {{-- <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a> --}}
                     {{-- <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Deactive</a> --}}
-                    @can('product-edit')
-                    <a class="btn btn-primary" href="{{ route('products.edit',$product->id) }}">Edit</a>
+                    @can('customer-edit')
+                    <a class="btn btn-primary" href="{{ route('customers.edit',$customer->id) }}">Edit</a>
                     @endcan
                     @csrf
                     @method('DELETE')
-                    @can('product-delete')
+                    @can('customer-delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                     @endcan
                 </form>
@@ -50,6 +49,6 @@
         </tr>
         @endforeach
     </table>
-    {!! $products->links() !!}
+    {!! $customers->links() !!}
     <p class="text-center text-primary"><small></small></p>
 @endsection

@@ -2,12 +2,14 @@
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SupplierController;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -39,10 +41,13 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 Route::group(['middleware' => ['auth']], function () {
+
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('products', ProductController::class);
     Route::resource('category', CategoryController::class);
+    Route::resource('customers', CustomerController::class);
+    Route::resource('suppliers', SupplierController::class);
 
     // profile manage
     Route::get('/profile-manage', [HomeController::class, 'profileUpdateShow'])->name('profileUpdateShow');
@@ -50,5 +55,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('change-password', [HomeController::class, 'passwordChangeindex'] );
     Route::post('change-password', [HomeController::class, 'passwordChangeStore'])->name('change.password');
+
+
 
 });

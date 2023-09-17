@@ -31,7 +31,6 @@ class CategoryController extends Controller
         // $categories = Category::with('children')->whereNull('parent_id')->get();
         // return view('categories.index')->with(['categories'  => $categories,]);
 
-
         $categories = Category::where('parent_id', null)->orderby('name', 'asc')->get();
         return view('categories.index', compact('categories'));
     }

@@ -20,7 +20,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('products.update', $product->id) }}" method="POST">
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data" >
         @csrf
         @method('PUT')
         <div class="row">
@@ -47,21 +47,98 @@
 
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Products:</strong>
                     <input type="text" name="name" value="{{ $product->name }}" class="form-control"
                         placeholder="Name">
                 </div>
             </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Manufacturer/Brand:</strong>
+                    <input type="text" name="manufacturer" class="form-control"
+                    value="{{ $product->manufacturer }}" placeholder="manufacturer Name">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Measurement Unit: </strong> <span>Like: PCS, Liter, KG etc. </span>
+                    <input type="text" name="measurement_unit"  value="{{ $product->measurement_unit }}"  class="form-control" placeholder="Measurement Unit Name">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Model:</strong>
+                    <input type="text" name="model"  value="{{ $product->model }}"  class="form-control" placeholder="Model Name">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Color: </strong>
+                    <input type="text" name="color"  value="{{ $product->color }}"  class="form-control" placeholder="Color Name">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Image:</strong>
+                    <input type="file" name="image" class="form-control" placeholder="image">
+                    <br>
+                    <img src="/images/{{ $product->image }}" width="100px">
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong> Details:</strong>
                     <textarea class="form-control" style="height:150px" name="detail" placeholder="Detail">{{ $product->detail }}</textarea>
                 </div>
             </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Chassis Number:</strong>
+                    <input type="number" name="chassis_number"  value="{{ $product->chassis_number }}" class="form-control" placeholder="Chassis Number ">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Engine Number: </strong>
+                    <input type="number" name="engine_number"  value="{{ $product->engine_number }}" class="form-control" placeholder="Engine Number">
+                </div>
+            </div>
+
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Registration Number: </strong>
+                    <input type="text" name="reg_number"  value="{{ $product->reg_number }}" class="form-control" placeholder="Registration Number">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Registration Date: </strong>
+                    <input type="date" name="reg_date" value="{{ $product->reg_date }}"  class="form-control" placeholder="Registration Date">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div class="form-group">
+                    <strong>Cubic Capacity (CC):</strong>
+                    <input type="text" name="cubic_capacity" value="{{ $product->cubic_capacity }}"  class="form-control" placeholder="Cubic Capacity (CC) ">
+                    </br>
+                </div>
+            </div>
+
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Update</button>
             </div>
         </div>
     </form>
