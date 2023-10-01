@@ -17,3 +17,191 @@ Sub Sub Category: https://91techsquare.com/how-to-create-multilevel-category-and
 
 1. Seperate Category and Product
 2. Organization Profile table mcr [org_name, email, phone, address, image]
+
+
+
+
+// query
+
+//get sales invoice
+    public function get_sales_invoice($sales_invoice_id)
+    {
+        $this->db->select('*');
+        $this->db->from('sales_invoice');
+        $this->db->where('sales_invoice_id', $sales_invoice_id);
+        $this->db->join('setup_customers', 'sales_invoice.customer_id = setup_customers.customer_id', 'left');
+        $this->db->join('users', 'sales_invoice.sales_invoice_entry_by = users.user_id', 'left');
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+
+//Sales detail print
+    public function sales_detail_print($sales_invoice_id)
+    {
+        $data = array();
+        $data['main'] = true;
+        $client_id = $this->session->userdata('client_code');
+         $sales_info = $this->inventory_model->get_sales_invoice($sales_invoice_id);
+        $discount = $sales_info->sales_invoice_discount+$sales_info->sales_total_discount;
+        $total = $sales_info->sales_total_amount+$sales_info->sales_total_vat-$discount;
+
+        $paid_amount = $sales_info->sales_amount_paid+$sales_info->sales_advance_payment;
+        $due = $total-$paid_amount;
+        $data['total'] = $total;
+        $data['total_vat'] = $sales_info->sales_total_vat;
+        $data['paid_amount'] = $paid_amount;
+        $data['due'] = $due;
+        $data['discount'] = $discount;
+        $data['in_word'] = $this->numbertowordconvertsconver->getBdCurrency($total);
+        $data['sales_info'] = $sales_info;
+        $data['client_info'] = $this->inventory_model->get_client_by_id($client_id);
+        $data['sales_item'] = $this->inventory_model->get_sales_item($sales_invoice_id);
+        $data['main_content'] = $this->load->view('home/sales_invoice_pdf', $data,true);
+        $this->load->view('home/client_home', $data);
+    }
+
+
+
+ //get sales return invoice
+    public function get_sales_return_invoice($sales_invoice_id)
+    {
+        $this->db->select('*');
+        $this->db->select_sum('sr_total_amount');
+        $this->db->select_sum('sr_amount_paid');
+        $this->db->select_sum('sr_total_discount');
+        $this->db->from('sales_return_invoice');
+        $this->db->where('sales_invoice_id', $sales_invoice_id);
+        $this->db->group_by('sales_invoice_id');
+        $query = $this->db->get();
+        return $query->row();
+    }
+
+
+//sales product search
+
+    public function sales_product_search($postData)
+      {
+         $response = array();
+         if(isset($postData['search']) ){
+           // Select record
+           $this->db->select('*');
+           $this->db->where('products.client_id', $this->session->userdata('client_code'));
+           $this->db->where("product_status =", 1);
+           //$this->db->where("product_stock >", 0);
+           // $this->db->where("product_name like '%".$postData['search']."%' ");
+           // $this->db->or_where("product_code like '%".$postData['search']."%' ");
+           $this->db->group_start();
+            $this->db->or_like('product_name', $postData['search'], 'both');
+            $this->db->or_like('product_code', $postData['search'], 'both');
+            $this->db->or_like('product_sn', $postData['search'], 'both');
+            $this->db->or_like('product_model', $postData['search'], 'both');
+            $this->db->group_end();
+           $this->db->join('inventory_stock', 'products.product_id =  inventory_stock.product_id');
+           $this->db->join('setup_units', 'products.measurement_unit = setup_units.unit_id', 'left');
+
+           $records = $this->db->get('products')->result();
+
+           foreach($records as $row ){
+              $response[] = array("value"=>$row->product_id,
+                                  "code"=>$row->product_code,
+                                  "label"=>$row->product_name,
+                                  "mrp"=>$row->product_unit_mrp,
+                                  "unit"=>$row->unit_name,
+                                  "stock"=>$row->product_stock,
+                                  "tp"=>$row->product_unit_price,
+                                  "vat"=>number_format((float)$row->product_vat_per, 2, '.', '')
+                              );
+           }
+
+         }
+
+         return $response;
+      }
+
+
+//sales search
+    public function sales_return_search_list()
+     {
+      $output = '';
+     $query = $this->input->post('query');
+
+
+      $data = $this->inventory_model->fetch_sales_return_search_list($query);
+
+      $output .= '
+      <table class="table table-bordered table-striped table-hover" id="example1">
+        <thead>
+            <tr>
+              <th width="30">SL.</th>
+              <th>Date</th>
+              <th>Invoice#</th>
+              <th>Customer</th>
+              <th>Contact No.</th>
+              <th>Payable</th>
+              <th>Paid</th>
+              <th>Balance</th>
+              <th>Action</th>
+            </tr>
+            </thead>
+        <tbody>
+      ';
+      if($query != "" && $data->num_rows() > 0)
+      {
+        $x=1;
+       foreach($data->result() as $info)
+       {
+        $discount = $info->sales_invoice_discount+$info->sales_total_discount;
+        $total = $info->sales_total_amount-$discount+$info->sales_total_vat;
+
+        $sales_amount_paid = $info->sales_amount_paid+$info->sales_advance_payment;
+        $balance = $total-$sales_amount_paid;
+
+            $output .= '
+              <tr>
+               <td>'.$x++.'</td>
+               <td>'.date('d/m/Y', strtotime($info->sales_invoice_date)).'</td>
+               <td>'.$info->sales_invoice_no.'</td>
+               <td>'.$info->customer_name.'</td>
+               <td>'.$info->customer_mobile.'</td>
+               <td>'.number_format((float)$total, 2, '.', '').'</td>
+               <td>'.number_format((float)$sales_amount_paid, 2, '.', '').'</td>
+               <td>'.number_format((float)$balance, 2, '.', '').'</td>
+               <td>
+                <a class="btn btn-primary btn-xs" href="'.base_url() . "sales-return-entry/" .$info->sales_invoice_id.'">Return</a>
+               </td>
+              </tr>
+            ';
+            }
+      }
+
+      else
+      {
+       $output .= '<tr>
+           <td colspan="9">No Data Found</td>
+          </tr>';
+      }
+      $output .= '</tbody></table>';
+      echo $output;
+     }
+
+// Purchase and sales table
+
+purchase
+
+id,supplier_id,product_id,purchase_invoice_no,purchase_quantity, purchase_rate, purchase_amount, purchase_amount_paid, purchase_balance_due, purchase_vat, purchase_discount, sale_price, purchase_payment_type, purchase_payment_status,purchase_return_quantity, purchase_return_rate, purchase_return_amount, purchase_return_discount,purchase_return_vat,purchase_date
+
+sales
+
+id,customer_id,product_id,sales_invoice_no,sales_quantity,  sale_price, sales_amount,sales_amount_paid, sales_balance_due, sales_vat, sales_discount, sales_payment_type, sales_payment_status,
+sales_return_quantity, sales_return_rate, sales_return_amount, sales_return_discount,sales_return_vat,sales_date
+
+stock
+
+id, product_id, product_code, product_stock, stock_status
+
+php artisan make:migration stock
+php artisan make:model Stock
+
+
+vintagemotors007.com

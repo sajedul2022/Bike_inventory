@@ -189,11 +189,11 @@
                                 clip-rule="evenodd"></path>
                         </svg></span>
                 </span>
-                <div class="multi-level collapse {{ Request::segment(1) == 'buttons' || Request::segment(1) == 'notifications' || Request::segment(1) == 'forms' || Request::segment(1) == 'modals' || Request::segment(1) == 'typography' ? 'show' : '' }}"
+                <div class="multi-level collapse {{ Request::segment(1) == 'purchase' || Request::segment(1) == 'notifications' || Request::segment(1) == 'forms' || Request::segment(1) == 'modals' || Request::segment(1) == 'typography' ? 'show' : '' }}"
                     role="list" id="submenu-purchase" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::segment(1) == 'buttons' ? 'active' : '' }}">
-                            <a class="nav-link" href="/buttons">
+                        <li class="nav-item {{ Request::segment(1) == 'purchase' ? 'active' : '' }}">
+                            <a class="nav-link" href="/purchase">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Purchase </span>
                             </a>

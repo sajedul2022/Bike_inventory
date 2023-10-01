@@ -70,7 +70,7 @@ class SupplierController extends Controller
 
         Supplier::create($input);
 
-        return redirect()->route('suppliers.index')
+        return redirect()->route('purchase.create')
             ->with('success', 'Created successfully.');
     }
 

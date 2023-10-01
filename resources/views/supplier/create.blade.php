@@ -64,14 +64,14 @@
 
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-                <strong>Nid Number: </strong>
-                <input type="text" name="nid" class="form-control" placeholder="Nid  Number">
+                <strong>NID Number: </strong>
+                <input type="text" name="nid" class="form-control" placeholder="NID  Number">
             </div>
         </div>
 
         <div class="col-xs-6 col-sm-6 col-md-6">
             <div class="form-group">
-                <strong>Nid Image:</strong>
+                <strong>NID Image:</strong> <span>jpg, png, jpeg</span>
                 <input type="file" name="nid_image" class="form-control" placeholder="image">
             </div>
         </div>
@@ -93,5 +93,6 @@
 
         </div>
     </form>
-    <p class="text-center text-primary"><small></small></p>
+
+
 @endsection
