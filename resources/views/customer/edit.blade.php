@@ -61,6 +61,13 @@
                 </div>
             </div>
 
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Date Of Birth: </strong>
+                    <input type="date" name="dob" value="{{ $customer->dob }}" class="form-control" placeholder="Date of Birth">
+                </div>
+            </div>
+
 
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
@@ -71,10 +78,24 @@
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong> Address:</strong>
                     <textarea class="form-control" style="height:150px" name="address" placeholder="Detail"> {{ $customer->address }} </textarea>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Mediator Name:</strong>
+                    <input type="text" name="mediator_name" value="{{ $customer->mediator_name }}" class="form-control" placeholder="Mediator Name"> </br>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Mediator Phone:</strong>
+                    <input type="number" name="mediator_phone" value="{{ $customer->mediator_phone }}" class="form-control" placeholder="Mediator Phone "> </br>
                 </div>
             </div>
 

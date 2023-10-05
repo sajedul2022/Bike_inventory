@@ -16,10 +16,10 @@ return new class extends Migration
 
     public function up()
     {
-        Schema::create('stock', function (Blueprint $table) {
+        Schema::create('stocks', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('product_code');
+            $table->unsignedBigInteger('product_code')->nullable();
             $table->integer('product_stock');
             $table->boolean('stock_status')->default(1);
             $table->timestamps();
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('stock');
+        Schema::dropIfExists('stocks');
     }
 };

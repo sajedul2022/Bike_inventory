@@ -21,10 +21,12 @@ return new class extends Migration
             $table->integer('phone');
             $table->integer('nid')->nullable();
             $table->string('nid_image')->nullable();
+            $table->date('dob')->nullable();
+            $table->string('mediator_name')->nullable();
+            $table->integer('mediator_phone')->nullable();
             $table->longText('address')->nullable();
             $table->timestamps();
         });
-
 
     }
 

@@ -8,7 +8,8 @@
                         alt="Bonnie Green">
                 </div>
                 <div class="d-block">
-                    <h2 class="h5 mb-3">Hi, {{ auth()->user()->email ? auth()->user()->email : auth()->user()->name }}</h2>
+                    <h2 class="h5 mb-3">Hi, {{ auth()->user()->email ? auth()->user()->email : auth()->user()->name }}
+                    </h2>
                     <a href="{{ route('logout') }}" class="btn btn-secondary btn-sm d-inline-flex align-items-center"
                         onclick="event.preventDefault();
                                 document.getElementById('logout-form').submit();">
@@ -131,11 +132,11 @@
                                 clip-rule="evenodd"></path>
                         </svg></span>
                 </span>
-                <div class="multi-level collapse {{ Request::segment(1) == 'buttons' || Request::segment(1) == 'notifications' || Request::segment(1) == 'forms' || Request::segment(1) == 'modals' || Request::segment(1) == 'typography' ? 'show' : '' }}"
+                <div class="multi-level collapse {{ Request::segment(1) == 'sales' || Request::segment(1) == 'notifications' || Request::segment(1) == 'forms' || Request::segment(1) == 'modals' || Request::segment(1) == 'typography' ? 'show' : '' }}"
                     role="list" id="submenu-sales" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::segment(1) == 'buttons' ? 'active' : '' }}">
-                            <a class="nav-link" href="/buttons">
+                        <li class="nav-item {{ Request::segment(1) == 'sales' ? 'active' : '' }}">
+                            <a class="nav-link" href="/sales">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Sales </span>
                             </a>
@@ -146,7 +147,7 @@
                                     class="sidebar-text"> Sales Invoice </span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
                             <a class="nav-link" href="/forms">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Sales Return</span>
@@ -157,7 +158,7 @@
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Sales Return list </span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
                             <a class="nav-link" href="/typography">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
@@ -204,7 +205,7 @@
                                     class="sidebar-text"> Purchase Invoice </span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
                             <a class="nav-link" href="/forms">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">Purchase Return</span>
@@ -215,7 +216,7 @@
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Return List </span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
                             <a class="nav-link" href="/typography">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
@@ -263,31 +264,36 @@
                                     New Product </span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products2">
-                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
-                                    class="sidebar-text"> Manage Product </span>
-                            </a>
-                        </li>
-                        <li class="nav-item {{ Request::segment(1) == 'products3' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products3">
-                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
-                                    class="sidebar-text">Brand</span>
-                            </a>
-                        </li>
+
                         <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
                             <a class="nav-link" href="/products4">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Stock Report </span>
                             </a>
                         </li>
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
+                            <a class="nav-link" href="/products">
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text"> Manage Product </span>
+                            </a>
+                        </li> --}}
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products3' ? 'active' : '' }}">
+                            <a class="nav-link" href="/products3">
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text">Brand</span>
+                            </a>
+                        </li>
+
                         <li class="nav-item {{ Request::segment(1) == 'products5' ? 'active' : '' }}">
                             <a class="nav-link" href="/products5">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Low Stock Report</span>
                             </a>
-                        </li>
+                        </li> --}}
+
                     </ul>
                 </div>
             </li>
@@ -316,13 +322,14 @@
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'customers2' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'customers2' ? 'active' : '' }}">
                             <a class="nav-link" href="/customers2">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Manage Customer </span>
                             </a>
-                        </li>
+                        </li> --}}
+
                         <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
                             <a class="nav-link" href="/products2">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
@@ -359,13 +366,14 @@
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'suppliers2' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'suppliers2' ? 'active' : '' }}">
                             <a class="nav-link" href="/suppliers2">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Manage Supplier </span>
                             </a>
-                        </li>
+                        </li> --}}
+
                         <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
                             <a class="nav-link" href="/products2">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
@@ -421,12 +429,12 @@
                                     class="sidebar-text"> Stock Report </span>
                             </a>
                         </li>
-                        <li class="nav-item {{ Request::segment(1) == 'products3' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products3' ? 'active' : '' }}">
                             <a class="nav-link" href="/products3">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">Low Stock Report</span>
                             </a>
-                        </li>
+                        </li> --}}
                         <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
                             <a class="nav-link" href="/products4">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span

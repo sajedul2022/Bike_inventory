@@ -73,7 +73,7 @@ class CustomerController extends Controller
 
         Customer::create($input);
 
-        return redirect()->route('customers.index')
+        return redirect()->route('sales.create')
             ->with('success', ' created successfully.');
     }
 

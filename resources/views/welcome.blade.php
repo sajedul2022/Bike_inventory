@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Bike Management Sytem</title>
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-      <!-- Icon Font  awesome Stylesheet -->
-      <script src="https://kit.fontawesome.com/230a51e61c.js" crossorigin="anonymous"></script>
+    <!-- Icon Font  awesome Stylesheet -->
+    <script src="https://kit.fontawesome.com/230a51e61c.js" crossorigin="anonymous"></script>
     <!-- custom css -->
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('css/media.css') }}">
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -30,11 +32,11 @@
                                         class="text-sm text-gray-700 dark:text-gray-500 underline">Home</a>
                                 @else
                                     <a href="{{ route('login') }}"
-                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Login  </a> |
+                                        class="text-sm text-gray-700 dark:text-gray-500 underline">Login </a>
 
                                     @if (Route::has('register'))
-                                        <a href="{{ route('register') }}"
-                                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+                                        {{-- <a href="{{ route('register') }}"
+                                            class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a> --}}
                                     @endif
                                 @endauth
                             </div>
@@ -48,23 +50,24 @@
                     <div class="col-lg-4 col-md-4  ">
                         <div class="part1">
                             <i class="fa-solid fa-location-dot"></i>
-                                <p> Baltimore, Maryland, USA</p>
-                                {{-- <p> House #: 01 (4th Floor), Road #: 20, Block - J, Baridhara, Dhaka 1212, --}}
-                                <p> Baridhara, Dhaka Bangladesh  <p>
+                            <p> Baltimore, Maryland, USA</p>
+                            {{-- <p> House #: 01 (4th Floor), Road #: 20, Block - J, Baridhara, Dhaka 1212, --}}
+                            <p> Baridhara, Dhaka Bangladesh
+                            <p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 ">
                         <div class="part1">
-                        <i class="fa-solid fa-envelope"></i>
+                            <i class="fa-solid fa-envelope"></i>
                             <p> info@aaconsulting.tech </p>
                             <p> sales@aaconsulting.tech </p>
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-4 ">
                         <div class="part1">
-                        <i class="fa-brands fa-whatsapp"></i>
+                            <i class="fa-brands fa-whatsapp"></i>
                             <p>+1 443 253 0203 (USA)</p>
-                            <p> +880 2 4881 2159   || <span> +88 01672 996464 (BD)  </span> </p>
+                            <p> +880 2 4881 2159 || <span> +88 01672 996464 (BD) </span> </p>
 
 
                         </div>

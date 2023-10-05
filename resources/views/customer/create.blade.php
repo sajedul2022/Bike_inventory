@@ -71,22 +71,43 @@
 
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Nid Number: </strong>
+                    <strong>NID Number: </strong>
                     <input type="text" name="nid" class="form-control" placeholder="Nid  Number">
                 </div>
             </div>
 
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
-                    <strong>Nid Image:</strong>
+                    <strong>Date Of Birth: </strong>
+                    <input type="date" name="dob" class="form-control" placeholder="Date of Birth">
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>NID Image:</strong> <span>jpg, png, jpeg</span>
                     <input type="file" name="nid_image" class="form-control" placeholder="image">
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong> Address:</strong>
                     <textarea class="form-control" style="height:150px" name="address" placeholder="Detail"></textarea>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Mediator Name:</strong>
+                    <input type="text" name="mediator_name" class="form-control" placeholder="Mediator Name">  </br>
+                </div>
+            </div>
+
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <div class="form-group">
+                    <strong>Mediator Phone:</strong>
+                    <input type="number" name="mediator_phone" class="form-control" placeholder="Mediator Phone "> </br>
                 </div>
             </div>
 

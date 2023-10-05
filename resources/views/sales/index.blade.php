@@ -1,14 +1,14 @@
 @extends('layouts.app')
-@section('title', 'All Purchase')
+@section('title', 'All Sales')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>All Purchase </h2>
+                <h2>All Sales </h2>
             </div>
             <div class="pull-right">
                 @can('product-create')
-                    <a class="btn btn-success" href="{{ route('purchase.create') }}"> New Purchase </a>
+                    <a class="btn btn-success" href="{{ route('sales.create') }}"> New Sales </a>
                 @endcan
             </div>
         </div>
@@ -22,32 +22,32 @@
         <tr>
             <th>No</th>
             <th>Product ID </th>
-            <th>Purchase Invoice </th>
-            <th>purchase_rate:</th>
-            <th>purchase_quantity:</th>
-            <th>Total Price:</th>
+            <th> Sales Invoice </th>
+            <th>Sales Rate:</th>
+            <th>Sales Quantity:</th>
+            <th>Sale Price:</th>
             {{-- <th> Image </th> --}}
             <th width="280px">Action</th>
         </tr>
-        @foreach ($purchases as $purchase)
+        @foreach ($sales as $sale)
             <tr>
                 <td>{{ ++$i }}</td>
-                <td>{{ $purchase->product_id }}</td>
-                <td>{{ $purchase->purchase_invoice_no }}</td>
-                <td>{{ $purchase->purchase_rate }}</td>
-                <td>{{ $purchase->purchase_quantity }}</td>
-                <td>{{ $purchase->purchase_total_amount }}</td>
+                <td>{{ $sale->product_id }}</td>
+                <td>{{ $sale->sales_invoice_no }}</td>
+                <td>{{ $sale->sale_price }}</td>
+                <td>{{ $sale->sales_quantity }}</td>
+                <td>{{ $sale->sales_total_amount }}</td>
                 {{-- <td><img src="/images/{{ $product->image }}" width="80px"></td> --}}
                 <td>
-                    <form action="{{ route('purchase.destroy', $purchase->id) }}" method="POST">
+                    <form action="{{ route('sales.destroy', $sale->id) }}" method="POST">
                         {{-- <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a> --}}
                         {{-- <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Deactive</a> --}}
-                        @can('Purchase-edit')
-                            <a class="btn btn-primary" href="{{ route('purchase.edit', $purchase->id) }}">Edit</a>
+                        @can('sales-edit')
+                            <a class="btn btn-primary" href="{{ route('sales.edit', $sale->id) }}">Edit</a>
                         @endcan
                         @csrf
                         @method('DELETE')
-                        @can('Purchase-delete')
+                        @can('sales-delete')
                             <button type="submit" class="btn btn-danger">Delete</button>
                         @endcan
                     </form>
@@ -55,5 +55,5 @@
             </tr>
         @endforeach
     </table>
-    {!! $purchases->links() !!}
+    {!! $sales->links() !!}
 @endsection

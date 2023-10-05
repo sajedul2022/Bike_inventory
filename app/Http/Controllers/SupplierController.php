@@ -53,6 +53,8 @@ class SupplierController extends Controller
             'nid_image' => 'image|mimes:jpeg,png,jpg,giv,svg|max:2048',
         ]);
 
+        // {{-- 'dob', 'mediator_name', 'mediator_phone' --}}
+
         // $validator = Validator([
         //     'supplier_name' => 'required',
         //     'phone' => 'required',

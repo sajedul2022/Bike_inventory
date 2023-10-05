@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\purchase;
+use App\Models\Stock;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 // use Barryvdh\DomPDF\Facade\Pdf;
 use PDF;
 
@@ -67,6 +69,8 @@ class PurchaseController extends Controller
         $request->validate([
             'supplier_id' => 'required',
             'product_id' => 'required',
+            'purchase_quantity' => 'required',
+            'purchase_rate' => 'required',
             // 'image'=>'required|image|mimes:jpeg,png,jpg,giv,svg|max:2048',
         ]);
 
@@ -76,18 +80,14 @@ class PurchaseController extends Controller
         $input['purchase_quantity'] = $request->purchase_quantity;
         $input['purchase_rate'] = $request->purchase_rate;
         $input['purchase_amount'] = $input['purchase_rate'] * $input['purchase_quantity'];
-
-        // $input['purchase_amount_paid'] = $request->purchase_amount_paid;
-        // $input['purchase_balance_due'] = $request->purchase_balance_due;
-        // $input['purchase_vat'] = $request->purchase_vat;
-        // $input['purchase_discount'] = $request->purchase_discount;
-
-        // $input['purchase_total_amount'] = $input['purchase_amount'] + $input['purchase_balance_due'] - $input['purchase_amount_paid'] - $input['purchase_balance_due'] -  $input['purchase_discount'];
-
-        $input['sale_price'] =  $request->sale_price;
+        $input['purchase_vat'] = $request->purchase_vat;
+        $input['purchase_discount'] = $request->purchase_discount;
+        $input['purchase_balance_due'] = $request->purchase_balance_due;
+        $input['purchase_amount_paid'] = $request->purchase_amount_paid;
+        $input['purchase_total_amount'] = $input['purchase_balance_due'] + $input['purchase_amount_paid'];
+        // $input['sale_price'] =  $request->sale_price;
         $input['purchase_payment_type'] =  $request->purchase_payment_type;
         $input['purchase_date'] =  $request->purchase_date;
-
         $input['purchase_payment_status'] = 1;
 
         // if ($image = $request->file('image')) {
@@ -96,16 +96,46 @@ class PurchaseController extends Controller
         //     $image->move($destinationPath, $profileImage);
         //     $input['image'] = "$profileImage";
         // }
-
         // $input['auth_id'] = Auth::id();
         // $input['image'] = $image;
 
-
         purchase::create($input);
+
+        // stock table
+
+        $productID = $request->product_id;
+        $oldStockData  = DB::table('stocks')->where('product_id', '=', $productID)->select('id', 'product_id', 'product_stock')->get();
+        $oldID =  isset($oldStockData[0]->id) ? $oldStockData[0]->id : null;
+        $oldproductID =  isset($oldStockData[0]->product_id) ? $oldStockData[0]->product_id : null;
+        $oldStock =  isset($oldStockData[0]->product_stock) ? $oldStockData[0]->product_stock : null;
+        $InputStock = $request->purchase_quantity;
+        $UpdateStock = $oldStock + $InputStock;
+        $CheckID = $oldproductID == $productID;
+        // return dd($CheckID);
+
+        if ($CheckID == true) {
+
+            $stock = Stock::find($oldID);
+            $stock->update([
+                'product_id' => $request->product_id,
+                'product_stock' => $UpdateStock,
+                'stock_status' => 1,
+            ]);
+        } elseif ($CheckID == false) {
+
+            $stock = new Stock;
+            $stock->create([
+                'product_id' => $request->product_id,
+                'product_stock' => $request->purchase_quantity,
+                'stock_status' => 1,
+            ]);
+        }
 
         return redirect()->route('generate-pdf')
             ->with('success', 'Created successfully.');
     }
+
+
 
     /**
      * Display the specified resource.
@@ -152,21 +182,21 @@ class PurchaseController extends Controller
         //
     }
 
+    // search field
+
     public function index2()
-   {
-      return view('purchase.index2');
-   }
-
-
+    {
+        return view('purchase.index2');
+    }
 
     public function search(Request $request)
-   {
-      $employees = Product::all();
-      if($request->keyword != ''){
-      $employees = Product::where('name','LIKE','%'.$request->keyword.'%')->get();
-      }
-      return response()->json([
-         'employees' => $employees
-      ]);
+    {
+        $employees = Product::all();
+        if ($request->keyword != '') {
+            $employees = Product::where('name', 'LIKE', '%' . $request->keyword . '%')->get();
+        }
+        return response()->json([
+            'employees' => $employees
+        ]);
     }
 }
