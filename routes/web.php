@@ -64,11 +64,18 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/generate-pdf', [PdfController::class, 'generate_pdf'])->name('generate-pdf');
     Route::get('/download-pdf', [PdfController::class, 'download_pdf']);
-    Route::get('/purchase_pdf', [PdfController::class, 'purchase_pdf'])->name('purchase_pdf');
 
     // search
-
     Route::get('/search/', [ProductController::class, 'search'])->name('search');
-    // Route::get('/search/{id}', [ProductController::class, 'show'])->name('search.view');
+
+    // stock
+    Route::get('/stock', [ProductController::class, 'stock'])->name('stock');
+
+    // supplierDue
+    Route::get('/supplier-due', [SupplierController::class, 'supplierDue'])->name('supplier.due');
+
+    // customerDue
+    Route::get('/customer-due', [CustomerController::class, 'customerDue'])->name('customer.due');
+
 
 });

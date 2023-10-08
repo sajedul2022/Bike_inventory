@@ -154,7 +154,6 @@ class PurchaseController extends Controller
         $SupplierID = isset($purchases[0]->supplier_id) ? $purchases[0]->supplier_id : null;
         $suppliers  = DB::table('suppliers')->where('id', '=', $SupplierID)->select('*')->get();
 
-
         // return dd($SupplierID);
 
         $pdf = FacadePdf::loadView('purchase.purchase_invoice', compact('purchases', 'suppliers', 'products'));
@@ -196,7 +195,7 @@ class PurchaseController extends Controller
         //
     }
 
-    // search field
+
 
 
 

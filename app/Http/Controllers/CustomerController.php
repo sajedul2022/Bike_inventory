@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
 
@@ -157,4 +158,20 @@ class CustomerController extends Controller
         return redirect()->route('customers.index')
             ->with('success', 'Deleted successfully');
     }
+
+     // due
+     public function customerDue()
+     {
+         $CusDues =  DB::table('customers')
+         ->join('sales', 'customers.id', '=', 'sales.customer_id')
+         ->whereNot('sales.sales_balance_due' , '=','NULL')
+         ->select('customers.id',  'customers.customer_name','customers.phone','customers.address','customers.mediator_phone', 'sales.product_id','sales.sales_invoice_no','sales.sales_total_amount','sales.sales_amount_paid','sales.sales_balance_due',)
+         ->latest('sales.created_at')->paginate(10);
+         // ->get();
+
+         return view('customer.customer_due', compact('CusDues', ))
+             ->with('i', (request()->input('page', 1) - 1) * 5);
+     }
+
+
 }

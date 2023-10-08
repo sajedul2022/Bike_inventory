@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\purchase;
+use App\Models\Stock;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -222,16 +223,28 @@ class ProductController extends Controller
         $customerID = isset($sales[0]->customer_id) ? $sales[0]->customer_id : null;
         $customer  = DB::table('customers')->where('id', '=', $customerID)->select('*')->get();
 
-        // DB::table('users')
-        // ->join('contacts', 'users.id', '=', 'contacts.user_id')
-        // ->join('orders', 'users.id', '=', 'orders.user_id')
-        // ->select('users.id', 'contacts.phone', 'orders.price')
-        // ->get();
-
-        // return dd($supplier);
 
         $categories = Category::with('children')->whereNull('parent_id')->get();
         return view('search.searchview', compact('product', 'categories', 'supplier', 'customer'));
+    }
+
+    // stock
+
+    public function stock(Product $product)
+    {
+
+        $stocks =  DB::table('products')
+        ->join('stocks', 'products.id', '=', 'stocks.product_id')
+        ->select('products.id',  'products.name','products.product_code','products.manufacturer','products.reg_number', 'stocks.product_stock',)
+        ->latest('stocks.created_at')->paginate(10);
+        // ->get();
+
+        // return dd($stocks);
+        // $stocks = Stock::with('products')->get();
+        // $stocks = Stock::latest()->paginate(5);
+
+        return view('products.stock', compact('stocks', ))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
 

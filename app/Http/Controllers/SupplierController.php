@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Supplier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SupplierController extends Controller
 {
@@ -149,4 +150,19 @@ class SupplierController extends Controller
         return redirect()->route('suppliers.index')
             ->with('success', 'Deleted successfully');
     }
+
+    // due
+    public function supplierDue()
+    {
+        $suppDues =  DB::table('suppliers')
+        ->join('purchases', 'suppliers.id', '=', 'purchases.supplier_id')
+        ->whereNot('purchases.purchase_balance_due' , '=','NULL')
+        ->select('suppliers.id',  'suppliers.supplier_name','suppliers.phone','suppliers.address','suppliers.mediator_phone', 'purchases.product_id','purchases.purchase_invoice_no','purchases.purchase_total_amount','purchases.purchase_amount_paid','purchases.purchase_balance_due',)
+        ->latest('purchases.created_at')->paginate(10);
+        // ->get();
+
+        return view('supplier.supplier_due', compact('suppDues', ))
+            ->with('i', (request()->input('page', 1) - 1) * 5);
+    }
+
 }
