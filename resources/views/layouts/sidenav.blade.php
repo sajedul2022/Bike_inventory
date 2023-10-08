@@ -48,7 +48,7 @@
                         <img src="/assets/img/brand/bike2.png" height="20" width="20" alt="Volt Logo">
                     </span>
                     <span class="mt-1 ms-1 sidebar-text">
-                        Rex Zone
+                        Bike Inventory
                     </span>
                 </a>
             </li>
@@ -136,13 +136,13 @@
                     role="list" id="submenu-sales" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'sales' ? 'active' : '' }}">
-                            <a class="nav-link" href="/sales">
+                            <a class="nav-link" href="{{ route('sales.create') }}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Sales </span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::segment(1) == 'notifications' ? 'active' : '' }}">
-                            <a class="nav-link" href="/notifications">
+                            <a class="nav-link" href="{{ route('sales.index') }}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Sales Invoice </span>
                             </a>
@@ -160,7 +160,7 @@
                             </a>
                         </li> --}}
                         <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
-                            <a class="nav-link" href="/typography">
+                            <a class="nav-link" href="{{ route('home') }}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Sales Report</span>
                             </a>
@@ -194,13 +194,13 @@
                     role="list" id="submenu-purchase" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'purchase' ? 'active' : '' }}">
-                            <a class="nav-link" href="/purchase">
+                            <a class="nav-link" href="{{ route('purchase.create') }}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Purchase </span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::segment(1) == 'notifications' ? 'active' : '' }}">
-                            <a class="nav-link" href="/notifications">
+                            <a class="nav-link" href="{{ route('purchase.index') }}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Purchase Invoice </span>
                             </a>
@@ -218,7 +218,7 @@
                             </a>
                         </li> --}}
                         <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
-                            <a class="nav-link" href="/typography">
+                            <a class="nav-link" href="{{ route('home') }}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Purchase Report</span>
                             </a>
@@ -251,22 +251,30 @@
                     role="list" id="submenu-products" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'category' ? 'active' : '' }}">
-                            <a class="nav-link" href="/category">
+                            <a class="nav-link" href="{{ route('category.index') }}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Category </span>
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products">
+                        <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('products.create') }}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     New Product </span>
                             </a>
                         </li>
 
+                        <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('products.index') }}">
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text">
+                                    Manage Product </span>
+                            </a>
+                        </li>
+
                         <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products4">
+                            <a class="nav-link" href="{{ route('home') }}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Stock Report </span>
                             </a>
@@ -315,23 +323,24 @@
                 <div class="multi-level collapse {{ Request::segment(1) == 'customers' || Request::segment(1) == 'customers.index' || Request::segment(1) == 'products2' || Request::segment(1) == 'products3' || Request::segment(1) == 'products4' ? 'show' : '' }}"
                     role="list" id="submenu-customers" aria-expanded="false">
                     <ul class="flex-column nav">
+
                         <li class="nav-item {{ Request::segment(1) == 'customers' ? 'active' : '' }}">
-                            <a class="nav-link" href="/customers">
+                            <a class="nav-link" href="{{ route('customers.create') }}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Customer </span>
                             </a>
                         </li>
 
-                        {{-- <li class="nav-item {{ Request::segment(1) == 'customers2' ? 'active' : '' }}">
-                            <a class="nav-link" href="/customers2">
+                        <li class="nav-item {{ Request::segment(1) == 'customers2' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('customers.index') }}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Manage Customer </span>
                             </a>
-                        </li> --}}
+                        </li>
 
                         <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products2">
+                            <a class="nav-link" href="{{ route('home')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Customer Due Report
                                 </span>
@@ -360,22 +369,22 @@
                     role="list" id="submenu-supplier" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'suppliers' ? 'active' : '' }}">
-                            <a class="nav-link" href="/suppliers">
+                            <a class="nav-link" href="{{ route('suppliers.create')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> New Supplier </span>
                             </a>
                         </li>
 
-                        {{-- <li class="nav-item {{ Request::segment(1) == 'suppliers2' ? 'active' : '' }}">
-                            <a class="nav-link" href="/suppliers2">
+                        <li class="nav-item {{ Request::segment(1) == 'suppliers2' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('suppliers.index')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Manage Supplier </span>
                             </a>
-                        </li> --}}
+                        </li>
 
                         <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products2">
+                            <a class="nav-link" href="{{ route('home')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Supplier Due Report
                                 </span>
@@ -410,21 +419,21 @@
                     role="list" id="submenu-report" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'category' ? 'active' : '' }}">
-                            <a class="nav-link" href="/category">
+                            <a class="nav-link" href="{{ route('home')}}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Purchase Report </span>
                             </a>
                         </li>
 
                         <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products">
+                            <a class="nav-link"href="{{ route('home')}}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Sales Report </span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products2">
+                            <a class="nav-link" href="{{ route('home')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Stock Report </span>
                             </a>
@@ -436,13 +445,13 @@
                             </a>
                         </li> --}}
                         <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products4">
+                            <a class="nav-link" href="{{ route('home')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Profit & Loss </span>
                             </a>
                         </li>
                         <li class="nav-item {{ Request::segment(1) == 'products5' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products5">
+                            <a class="nav-link" href="{{ route('home')}}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Supplier Due</span>
@@ -450,7 +459,7 @@
                         </li>
 
                         <li class="nav-item {{ Request::segment(1) == 'products5' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products5">
+                            <a class="nav-link" href="{{ route('home')}}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Customer Due </span>
@@ -478,14 +487,14 @@
                     role="list" id="submenu-profile" aria-expanded="false">
                     <ul class="flex-column nav">
                         <li class="nav-item {{ Request::segment(1) == 'profile-manage' ? 'active' : '' }}">
-                            <a class="nav-link" href="/profile-manage">
+                            <a class="nav-link" href="{{ route('profileUpdateShow')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Profile Manage </span>
                             </a>
                         </li>
 
                         <li class="nav-item {{ Request::segment(1) == 'change-password' ? 'active' : '' }}">
-                            <a class="nav-link" href="/change-password">
+                            <a class="nav-link" href="{{ route('changePassword')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text">
                                     Re-Set Password </span>
@@ -495,9 +504,6 @@
                     </ul>
                 </div>
             </li>
-
-
-
 
             {{-- <li class="nav-item {{ Request::segment(1) == 'transactions' ? 'active' : '' }}">
                 <a href="/transactions" class="nav-link">

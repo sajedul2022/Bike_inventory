@@ -22,6 +22,7 @@
         <tr>
             <th>No</th>
             <th>Products</th>
+            <th>Products Code</th>
             <th>Measurement Unit:</th>
             <th> Image </th>
             <th width="280px">Action</th>
@@ -30,6 +31,7 @@
         <tr>
             <td>{{ ++$i }}</td>
             <td>{{ $product->name }}</td>
+            <td>{{ $product->product_code }}</td>
             <td>{{ $product->measurement_unit }}</td>
             <td><img src="/images/{{ $product->image }}" width="80px"></td>
             {{-- <p class="text-muted">{{ $product->category ? $product->category->name : 'Uncategorized' }}</p> --}}

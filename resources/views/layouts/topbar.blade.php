@@ -3,13 +3,13 @@
         <div class="d-flex justify-content-between w-100" id="navbarSupportedContent">
             <div class="d-flex align-items-center">
                 <!-- Search form -->
-                <form class="navbar-search form-inline" id="navbar-search-main">
+                <form action="{{ route('search') }}" method="GET" class="navbar-search form-inline">
                     <div class="input-group input-group-merge search-bar">
-                        <input type="text" class="form-control" id="topbarInputIconLeft" placeholder="Search"
-                            aria-label="Search" aria-describedby="topbar-addon">
+                        <input type="text" name="search" class="form-control" required />
                         <button type="submit" class="btn btn-primary"> Search </button>
                     </div>
                 </form>
+
             </div>
 
 
@@ -20,8 +20,7 @@
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="media d-flex align-items-center">
-                            <img class="avatar rounded-circle" alt="Image placeholder"
-                                src="/assets/img/team/user.png">
+                            <img class="avatar rounded-circle" alt="Image placeholder" src="/assets/img/team/user.png">
                             <div class="media-body ms-2 text-dark align-items-center d-none d-lg-block">
                                 <span class="mb-0 font-small fw-bold text-gray-900">
                                     {{ auth()->user()->email ? auth()->user()->email : auth()->user()->name }}
@@ -30,7 +29,7 @@
                         </div>
                     </a>
                     <div class="dropdown-menu dashboard-dropdown dropdown-menu-end mt-2 py-1">
-                        <a class="dropdown-item d-flex align-items-center"  href="{{ route('profileUpdateShow') }}"  >
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profileUpdateShow') }}">
                             <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"

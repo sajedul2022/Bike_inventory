@@ -19013,3 +19013,15 @@ div#theme-settings-expand {
 span.relative.z-0.inline-flex.shadow-sm.rounded-md {
     display: none;
 }
+
+/* search */
+
+.box {
+    border: 1px solid black;
+    background-color: #e7e7e7;
+}
+
+.display-4 {
+    text-align: center;
+    padding: 5px;
+}

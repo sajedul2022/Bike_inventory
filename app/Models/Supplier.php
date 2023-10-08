@@ -13,4 +13,10 @@ class Supplier extends Model
         'supplier_name', 'father_name', 'email', 'phone', 'nid', 'nid_image', 'address', 'dob', 'mediator_name', 'mediator_phone'
     ];
 
+
+    public function purchase()
+    {
+        return $this->belongsTo(purchase::class);
+    }
+
 }

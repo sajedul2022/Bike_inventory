@@ -29,6 +29,7 @@
     <div class="row">
 
         {{-- Create Customer --}}
+
         <div class="col-md-5">
             <div class="card">
                 <div class="card-header">
@@ -153,6 +154,7 @@
             </div>
         </div>
 
+        {{-- sale  --}}
         <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
@@ -171,10 +173,16 @@
                         </div>
                     @endif
 
+                    @if ($message = Session::get('success'))
+                    <div class="alert alert-success">
+                        <p>{{ $message }}</p>
+                    </div>
+                @endif
+
                     <form action="{{ route('sales.store') }}" method="POST" {{-- enctype="multipart/form-data" --}}>
                         @csrf
                         <div class="row">
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="supplier_id"> Customer </label>
                                     <select class="form-control" name="customer_id" required>
@@ -189,10 +197,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-12 col-sm-12 col-md-12">
+                            <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
                                     <label for="product_id"> Products </label>
-                                    <select class="form-control" name="product_id" required>
+                                    <select class="form-control" id="product_id" name="product_id" required>
                                         <option value="" disabled selected>Select</option>
                                         @if ($products)
                                             @foreach ($products as $product)
@@ -202,6 +210,35 @@
                                     </select>
                                 </div>
                             </div>
+
+                            {{-- <script>
+                                $('select').on('option', function() {
+                                    $('#has_stock').val($('#product_id').val());
+                                });
+                            </script>
+
+                            @php
+                                $productId = 1 ;
+                                $stock = App\Models\Stock::where('product_id', '=',  $productId)
+                                    ->select('id', 'product_id', 'product_stock')
+                                    ->get();
+                            @endphp
+
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <strong>Jquery Stock Quantity:</strong>
+                                    <input type="number" id="has_stock" name="has_stock"class="form-control"
+                                        placeholder="Stock" readonly>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6 col-md-6">
+                                <div class="form-group">
+                                    <strong>Stock Quantity:</strong>
+                                    <input type="number" name=""class="form-control"
+                                        value="{{ $stock[0]->product_stock }}" placeholder="Stock" readonly>
+                                </div>
+                            </div> --}}
 
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">

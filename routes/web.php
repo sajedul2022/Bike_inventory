@@ -57,19 +57,18 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/profile-manage', [HomeController::class, 'profileUpdateShow'])->name('profileUpdateShow');
     Route::post('/profile-manage', [HomeController::class, 'profileUpdate'])->name('profileupdate');
 
-    Route::get('change-password', [HomeController::class, 'passwordChangeindex']);
+    Route::get('change-password', [HomeController::class, 'passwordChangeindex'])->name('changePassword');
     Route::post('change-password', [HomeController::class, 'passwordChangeStore'])->name('change.password');
 
     // Purchase invoice
 
     Route::get('/generate-pdf', [PdfController::class, 'generate_pdf'])->name('generate-pdf');
     Route::get('/download-pdf', [PdfController::class, 'download_pdf']);
+    Route::get('/purchase_pdf', [PdfController::class, 'purchase_pdf'])->name('purchase_pdf');
 
     // search
 
-    // Route::post('/search', [PurchaseController::class, 'search'])->name('search');
-    // Route::get('/purchase-index', [PurchaseController::class, 'index2'])->name('search');
+    Route::get('/search/', [ProductController::class, 'search'])->name('search');
+    // Route::get('/search/{id}', [ProductController::class, 'show'])->name('search.view');
 
-    Route::get('/employee', [PurchaseController::class, 'index2']);
-    Route::post('/employee/search', [PurchaseController::class, 'search'])->name('employee.search');
 });

@@ -6,6 +6,8 @@
     "license": "MIT",
     "require": {
         "php": "^8.0",
+        "algolia/scout-extended": "^3.0",
+        "algolia/search-bundle": "^6.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0.5",
         "guzzlehttp/guzzle": "^7.2",

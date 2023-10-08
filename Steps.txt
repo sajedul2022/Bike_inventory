@@ -202,6 +202,8 @@ id, product_id, product_code, product_stock, stock_status
 
 php artisan make:migration stock
 php artisan make:model Stock
+php artisan make:model PurchaseInvoice -m
+php artisan make:model saleInvoice -m
 
 
 vintagemotors007.com

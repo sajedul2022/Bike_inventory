@@ -19,11 +19,36 @@ class Product extends Model
     ];
 
     public function user() {
-        return $this->belongsTo('App\Models\User');
+        return $this->belongsTo(User::class);
     }
 
     public function category() {
-        return $this->belongsTo('App\Models\Category');
+        return $this->belongsTo(Category::class);
     }
+
+    public function purchase()
+    {
+        return $this->hasMany(purchase::class);
+    }
+
+    public function sale()
+    {
+        return $this->hasMany(sale::class);
+    }
+
+    public function stock()
+    {
+        return $this->hasMany(Stock::class);
+        // return $this->hasMany('App\Models\Stock');
+    }
+
+    // public function curriculums(){
+    //     return $this->hasMany(Curriculum::class);
+    // }
+
+    // public function students() {
+    //     return $this->belongsToMany(User::class, 'course_student', 'course_id', 'user_id');
+    // }
+
 
 }

@@ -6,6 +6,7 @@ use App\Models\Customer;
 use App\Models\Product;
 use App\Models\sale;
 use App\Models\Stock;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Console\View\Components\Alert;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -70,7 +71,8 @@ class SaleController extends Controller
 
         $input['customer_id'] = $request->customer_id;
         $input['product_id'] = $request->product_id;
-        $input['sales_invoice_no'] = rand(100, 100000);
+        // $input['sales_invoice_no'] = rand(100, 100000);
+        $input['sales_invoice_no'] = date('Ydis');;
         $input['sales_quantity'] = $request->sales_quantity;
         $input['sale_price'] = $request->sale_price;
         $input['sales_amount'] = $input['sale_price'] * $input['sales_quantity'];
@@ -138,7 +140,7 @@ class SaleController extends Controller
             ]);
         }
 
-        return redirect()->route('generate-pdf')
+        return redirect()->route('sales.index')
             ->with('success', 'Created successfully.');
     }
 
@@ -150,7 +152,19 @@ class SaleController extends Controller
      */
     public function show(sale $sale)
     {
-        //
+        $saleId = $sale['id'];
+        $sales  = DB::table('sales')->where('id', '=', $saleId)->select('*')->get();
+
+        $ProductID = isset($sales[0]->product_id) ? $sales[0]->product_id : null;
+        $products  = DB::table('products')->where('id', '=', $ProductID)->select('*')->get();
+
+        $customerID = isset($sales[0]->customer_id) ? $sales[0]->customer_id : null;
+        $customers  = DB::table('customers')->where('id', '=', $customerID)->select('*')->get();
+
+        // return dd($SupplierID);
+
+        $pdf = Pdf::loadView('sales.sales_invoice', compact('sales', 'customers', 'products'));
+        return $pdf->stream('billing-invoice');
     }
 
     /**

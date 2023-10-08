@@ -7,6 +7,8 @@ use App\Models\Product;
 use App\Models\purchase;
 use App\Models\Stock;
 use App\Models\Supplier;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Illuminate\Database\DBAL\TimestampType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +25,6 @@ class PurchaseController extends Controller
         $this->middleware('permission:Purchase-edit', ['only' => ['edit', 'update']]);
         $this->middleware('permission:Purchase-delete', ['only' => ['destroy']]);
     }
-
 
     /**
      * Display a listing of the resource.
@@ -61,8 +62,6 @@ class PurchaseController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // id,supplier_id,product_id,purchase_invoice_no,purchase_quantity, purchase_rate, purchase_amount, purchase_amount_paid, purchase_balance_due, purchase_vat, purchase_discount,purchase_total_amount, sale_price, purchase_payment_type, purchase_payment_status,purchase_return_quantity, purchase_return_rate, purchase_return_amount, purchase_return_discount,purchase_return_vat,purchase_date
-
     public function store(Request $request)
     {
 
@@ -76,7 +75,8 @@ class PurchaseController extends Controller
 
         $input['supplier_id'] = $request->supplier_id;
         $input['product_id'] = $request->product_id;
-        $input['purchase_invoice_no'] = rand(100, 100000);
+        // $input['purchase_invoice_no'] = rand(100, 100000); time('His') date('Ymd').
+        $input['purchase_invoice_no'] = date('Ydis');
         $input['purchase_quantity'] = $request->purchase_quantity;
         $input['purchase_rate'] = $request->purchase_rate;
         $input['purchase_amount'] = $input['purchase_rate'] * $input['purchase_quantity'];
@@ -131,10 +131,10 @@ class PurchaseController extends Controller
             ]);
         }
 
-        return redirect()->route('generate-pdf')
+        // return redirect()->route('generate-pdf')
+        return redirect()->route('purchase.index')
             ->with('success', 'Created successfully.');
     }
-
 
 
     /**
@@ -145,7 +145,21 @@ class PurchaseController extends Controller
      */
     public function show(purchase $purchase)
     {
-        //
+        $purchaseID = $purchase['id'];
+        $purchases  = DB::table('purchases')->where('id', '=', $purchaseID)->select('*')->get();
+
+        $ProductID = isset($purchases[0]->product_id) ? $purchases[0]->product_id : null;
+        $products  = DB::table('products')->where('id', '=', $ProductID)->select('*')->get();
+
+        $SupplierID = isset($purchases[0]->supplier_id) ? $purchases[0]->supplier_id : null;
+        $suppliers  = DB::table('suppliers')->where('id', '=', $SupplierID)->select('*')->get();
+
+
+        // return dd($SupplierID);
+
+        $pdf = FacadePdf::loadView('purchase.purchase_invoice', compact('purchases', 'suppliers', 'products'));
+        return $pdf->stream('billing-invoice');
+
     }
 
     /**
@@ -184,19 +198,6 @@ class PurchaseController extends Controller
 
     // search field
 
-    public function index2()
-    {
-        return view('purchase.index2');
-    }
 
-    public function search(Request $request)
-    {
-        $employees = Product::all();
-        if ($request->keyword != '') {
-            $employees = Product::where('name', 'LIKE', '%' . $request->keyword . '%')->get();
-        }
-        return response()->json([
-            'employees' => $employees
-        ]);
-    }
+
 }

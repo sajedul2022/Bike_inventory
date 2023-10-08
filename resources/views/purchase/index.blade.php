@@ -40,16 +40,15 @@
                 {{-- <td><img src="/images/{{ $product->image }}" width="80px"></td> --}}
                 <td>
                     <form action="{{ route('purchase.destroy', $purchase->id) }}" method="POST">
-                        {{-- <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Show</a> --}}
-                        {{-- <a class="btn btn-info" href="{{ route('products.show',$product->id) }}">Deactive</a> --}}
-                        @can('Purchase-edit')
+                        <a class="btn btn-info" href="{{ route('purchase.show',$purchase->id) }}">Invoice</a>
+                        {{-- @can('Purchase-edit')
                             <a class="btn btn-primary" href="{{ route('purchase.edit', $purchase->id) }}">Edit</a>
                         @endcan
                         @csrf
                         @method('DELETE')
                         @can('Purchase-delete')
                             <button type="submit" class="btn btn-danger">Delete</button>
-                        @endcan
+                        @endcan --}}
                     </form>
                 </td>
             </tr>

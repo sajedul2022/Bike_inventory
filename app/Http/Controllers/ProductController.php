@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\purchase;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Symfony\Component\Console\Input\Input;
+use Laravel\Scout\Searchable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -59,8 +63,8 @@ class ProductController extends Controller
     {
 
         $request->validate([
-            'name'=>'required',
-            'category_id'=>'required',
+            'name' => 'required',
+            'category_id' => 'required',
             // 'image'=>'mimes:jpeg,png,jpg,giv,svg|max:2048',
         ]);
 
@@ -99,7 +103,7 @@ class ProductController extends Controller
         Product::create($input);
 
         return redirect()->route('products.index')->withInput()
-                ->with('success', ' created successfully.');
+            ->with('success', ' created successfully.');
 
         // if ($validator->fails()) {
         //     return back()->withInput()->withErrors($validator);
@@ -109,16 +113,7 @@ class ProductController extends Controller
         // }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        return view('products.show', compact('product'));
-    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -132,7 +127,6 @@ class ProductController extends Controller
         // if ($product->user_id != Auth::id()) {
         //     return redirect()->back();
         //   }
-
         $categories = Category::with('children')->whereNull('parent_id')->get();
 
         return view('products.edit', compact('product', 'categories'));
@@ -185,6 +179,60 @@ class ProductController extends Controller
             ->with('success', ' deleted successfully');
     }
 
+    // search
+    use Searchable;
+
+    public function search(Request $request)
+    {
+        // Get the search value from the request
+        $search = $request->input('search');
+
+        // Search columns from the  table
+        $Searchs = Product::query()
+            ->where('name', 'LIKE', "%{$search}%")
+            ->orWhere('product_code', 'LIKE', "%{$search}%")
+            ->orWhere('model', 'LIKE', "%{$search}%")
+            ->orWhere('chassis_number', 'LIKE', "%{$search}%")
+            ->orWhere('engine_number', 'LIKE', "%{$search}%")
+            ->orWhere('reg_number', 'LIKE', "%{$search}%")
+            ->simplePaginate(5);
+        // ->get();
+
+        return view('search.allsearch', compact('Searchs'));
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Product  $product
+     * @return \Illuminate\Http\Response
+     */
+
+    //  search view
+
+    public function show(Product $product)
+    {
+        $productID = $product['id'];
+
+        $purchases  = DB::table('purchases')->where('product_id', '=', $productID)->select('id', 'product_id', 'supplier_id')->get();
+        $SupplierID = isset($purchases[0]->supplier_id) ? $purchases[0]->supplier_id : null;
+        $supplier  = DB::table('suppliers')->where('id', '=', $SupplierID)->select('*')->get();
+
+        $sales  = DB::table('sales')->where('product_id', '=', $productID)->select('id', 'product_id', 'customer_id')->get();
+        $customerID = isset($sales[0]->customer_id) ? $sales[0]->customer_id : null;
+        $customer  = DB::table('customers')->where('id', '=', $customerID)->select('*')->get();
+
+        // DB::table('users')
+        // ->join('contacts', 'users.id', '=', 'contacts.user_id')
+        // ->join('orders', 'users.id', '=', 'orders.user_id')
+        // ->select('users.id', 'contacts.phone', 'orders.price')
+        // ->get();
+
+        // return dd($supplier);
+
+        $categories = Category::with('children')->whereNull('parent_id')->get();
+        return view('search.searchview', compact('product', 'categories', 'supplier', 'customer'));
+    }
 
 
 }
