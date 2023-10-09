@@ -37,7 +37,7 @@
                 <td>{{ $purchase->purchase_rate }}</td>
                 <td>{{ $purchase->purchase_quantity }}</td>
                 <td>{{ $purchase->purchase_total_amount }}</td>
-                {{-- <td><img src="/images/{{ $product->image }}" width="80px"></td> --}}
+                {{-- <td><img src="{{ asset('images/'.$product->image) }}" width="80px"></td> --}}
                 <td>
                     <form action="{{ route('purchase.destroy', $purchase->id) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('purchase.show',$purchase->id) }}">Invoice</a>

@@ -60,10 +60,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('change-password', [HomeController::class, 'passwordChangeindex'])->name('changePassword');
     Route::post('change-password', [HomeController::class, 'passwordChangeStore'])->name('change.password');
 
-    // Purchase invoice
-
-    Route::get('/generate-pdf', [PdfController::class, 'generate_pdf'])->name('generate-pdf');
-    Route::get('/download-pdf', [PdfController::class, 'download_pdf']);
 
     // search
     Route::get('/search/', [ProductController::class, 'search'])->name('search');
@@ -76,6 +72,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     // customerDue
     Route::get('/customer-due', [CustomerController::class, 'customerDue'])->name('customer.due');
+
+    // report- sale - purchase
+    Route::get('/reposts/sales', [SaleController::class, 'saleReport'])->name('saleReport');
+    Route::get('/reposts/purchases', [SaleController::class, 'purchasesReport'])->name('purchasesReport');
 
 
 });

@@ -4,7 +4,11 @@
             class="user-card d-flex d-md-none align-items-center justify-content-between justify-content-md-center pb-4">
             <div class="d-flex align-items-center">
                 <div class="avatar-lg me-4">
-                    <img src="/assets/img/team/user.png" class="card-img-top rounded-circle border-white"
+
+                    {{-- <img src="/assets/img/team/user.png" class="card-img-top rounded-circle border-white"
+                        alt="Bonnie Green"> --}}
+
+                    <img src="{{ asset('/assets/img/team/user.png') }}" class="card-img-top rounded-circle border-white"
                         alt="Bonnie Green">
                 </div>
                 <div class="d-block">
@@ -45,7 +49,10 @@
             <li class="nav-item">
                 <a href="{{ url('/') }}" class="nav-link d-flex align-items-center">
                     <span class="sidebar-icon me-3">
-                        <img src="/assets/img/brand/bike2.png" height="20" width="20" alt="Volt Logo">
+
+                        {{-- <img src="/assets/img/brand/bike2.png" height="20" width="20" alt="Volt Logo"> --}}
+
+                        <img src="{{ asset('/assets/img/brand/bike2.png') }}" height="20" width="20" alt="Volt Logo">
                     </span>
                     <span class="mt-1 ms-1 sidebar-text">
                         Bike Inventory
@@ -147,6 +154,14 @@
                                     class="sidebar-text"> Sales Invoice </span>
                             </a>
                         </li>
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('home') }}">
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text"> Sales Report</span>
+                            </a>
+                        </li> --}}
+
                         {{-- <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
                             <a class="nav-link" href="/forms">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
@@ -159,12 +174,7 @@
                                     class="sidebar-text"> Sales Return list </span>
                             </a>
                         </li> --}}
-                        <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('home') }}">
-                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
-                                    class="sidebar-text"> Sales Report</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </li>
@@ -205,6 +215,14 @@
                                     class="sidebar-text"> Purchase Invoice </span>
                             </a>
                         </li>
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('home') }}">
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text"> Purchase Report</span>
+                            </a>
+                        </li> --}}
+
                         {{-- <li class="nav-item {{ Request::segment(1) == 'forms' ? 'active' : '' }}">
                             <a class="nav-link" href="/forms">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
@@ -217,12 +235,7 @@
                                     class="sidebar-text"> Return List </span>
                             </a>
                         </li> --}}
-                        <li class="nav-item {{ Request::segment(1) == 'typography' ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('home') }}">
-                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
-                                    class="sidebar-text"> Purchase Report</span>
-                            </a>
-                        </li>
+
                     </ul>
                 </div>
             </li>
@@ -418,7 +431,8 @@
                 <div class="multi-level collapse {{ Request::segment(1) == 'category' || Request::segment(1) == 'products' || Request::segment(1) == 'products2' || Request::segment(1) == 'products3' || Request::segment(1) == 'products4' ? 'show' : '' }}"
                     role="list" id="submenu-report" aria-expanded="false">
                     <ul class="flex-column nav">
-                        <li class="nav-item {{ Request::segment(1) == 'category' ? 'active' : '' }}">
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'category' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('home')}}">
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Purchase Report </span>
@@ -431,26 +445,14 @@
                                     class="sidebar-text">
                                     Sales Report </span>
                             </a>
-                        </li>
+                        </li> --}}
+
                         <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('stock')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Stock Report </span>
                             </a>
                         </li>
-                        {{-- <li class="nav-item {{ Request::segment(1) == 'products3' ? 'active' : '' }}">
-                            <a class="nav-link" href="/products3">
-                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
-                                    class="sidebar-text">Low Stock Report</span>
-                            </a>
-                        </li> --}}
-
-                        {{-- <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('home')}}" >
-                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
-                                    class="sidebar-text"> Profit & Loss </span>
-                            </a>
-                        </li> --}}
 
                         <li class="nav-item {{ Request::segment(1) == 'products5' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('supplier.due')}}">
@@ -467,6 +469,22 @@
                                     Customer Due </span>
                             </a>
                         </li>
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products3' ? 'active' : '' }}">
+                            <a class="nav-link" href="/products3">
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text">Low Stock Report</span>
+                            </a>
+                        </li> --}}
+
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('home')}}" >
+                                <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
+                                    class="sidebar-text"> Profit & Loss </span>
+                            </a>
+                        </li> --}}
+
+
                     </ul>
                 </div>
             </li>
@@ -536,8 +554,6 @@
                     @csrf
                 </form>
             </li>
-
-
 
         </ul>
     </div>

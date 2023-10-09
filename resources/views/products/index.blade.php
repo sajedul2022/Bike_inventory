@@ -33,7 +33,8 @@
             <td>{{ $product->name }}</td>
             <td>{{ $product->product_code }}</td>
             <td>{{ $product->measurement_unit }}</td>
-            <td><img src="/images/{{ $product->image }}" width="80px"></td>
+
+            <td><img src="{{ asset('images/'.$product->image) }}" width="80px"></td>
             {{-- <p class="text-muted">{{ $product->category ? $product->category->name : 'Uncategorized' }}</p> --}}
             <td>
                 <form action="{{ route('products.destroy',$product->id) }}" method="POST">

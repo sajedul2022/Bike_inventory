@@ -37,7 +37,7 @@
                 <td>{{ $suppDue->purchase_total_amount }}</td>
                 <td>{{ $suppDue->purchase_amount_paid }}</td>
                 <td>{{ $suppDue->purchase_balance_due }}</td>
-                {{-- <td><img src="/images/{{ $product->image }}" width="80px"></td> --}}
+                {{-- <td><img src="{{ asset('images/'.$supplier->nid_image) }}" width="80px"></td> --}}
             </tr>
         @endforeach
     </table>

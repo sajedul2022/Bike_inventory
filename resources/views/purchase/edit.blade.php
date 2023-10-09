@@ -89,7 +89,7 @@
                     <strong>Image:</strong>
                     <input type="file" name="image" class="form-control" placeholder="image">
                     <br>
-                    <img src="/images/{{ $product->image }}" width="100px">
+                    <img src="{{ asset('images/'.$product->image) }}" width="100px">
                 </div>
             </div>
 

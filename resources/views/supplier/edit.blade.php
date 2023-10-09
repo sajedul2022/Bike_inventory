@@ -79,7 +79,8 @@
                     <strong>Image:</strong>
                     <input type="file" name="nid_image" class="form-control" placeholder="image">
                     <br>
-                    <img src="/images/{{ $supplier->nid_image }}" width="100px">
+                    <img src="{{ asset('images/'.$supplier->nid_image) }}" width="100px">
+
                 </div>
             </div>
 

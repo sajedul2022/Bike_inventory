@@ -16,7 +16,7 @@
                 New
             </button>
             <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('users.create')}}" >
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -25,7 +25,7 @@
                     </svg>
                     Add User
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('products.create')}}" >
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -34,7 +34,7 @@
                     </svg>
                     Add Products
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('sales.create')}}" >
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
@@ -44,14 +44,14 @@
                     </svg>
                     Add Sale
                 </a>
-                <a class="dropdown-item d-flex align-items-center" href="#">
+                <a class="dropdown-item d-flex align-items-center" href="{{ route('purchase.create')}}">
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd"
                             d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                             clip-rule="evenodd"></path>
                     </svg>
-                    Add Customers
+                    Add Purchase
                 </a>
                 <div role="separator" class="dropdown-divider my-1"></div>
             </div>
@@ -76,13 +76,13 @@
                             </div>
                             <div class="d-sm-none">
                                 <h2 class="h5">Customers</h2>
-                                <h3 class="fw-extrabold mb-1">345,678</h3>
+                                <h3 class="fw-extrabold mb-1">{{ $customers }}</h3>
                             </div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
                                 <h2 class="h6 text-gray-400 mb-0">Customers</h2>
-                                <h3 class="fw-extrabold mb-2">320</h3>
+                                <h3 class="fw-extrabold mb-2">{{ $customers }}</h3>
                             </div>
                             {{-- <small class="d-flex align-items-center text-gray-500">
                                 Feb 1 - Apr 1,
@@ -125,14 +125,18 @@
                                 </svg>
                             </div>
                             <div class="d-sm-none">
-                                <h2 class="fw-extrabold h5">Revenue</h2>
-                                <h3 class="mb-1">43,594 BDT</h3>
+                                {{-- <h2 class="fw-extrabold h5">Revenue</h2>
+                                <h3 class="mb-1"> {{$salesTotal}} BDT</h3> --}}
+
+                                <h2 class="fw-extrabold h5"> Products </h2>
+                                <h3 class="mb-1">{{ $products }}</h3>
+
                             </div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
-                                <h2 class="h6 text-gray-400 mb-0">Revenue</h2>
-                                <h3 class="fw-extrabold mb-2">43,594 BDT </h3>
+                                <h2 class="h6 text-gray-400 mb-0">Sales Quantity</h2>
+                                <h3 class="fw-extrabold mb-2"> {{ $sales }} </h3>
                             </div>
                             {{-- <small class="d-flex align-items-center text-gray-500">
                                 Feb 1 - Apr 1,
@@ -173,14 +177,14 @@
                                 </svg>
                             </div>
                             <div class="d-sm-none">
-                                <h2 class="fw-extrabold h5"> Total Sale </h2>
-                                <h3 class="mb-1">50.88%</h3>
+                                <h2 class="fw-extrabold h5"> Sales Quantity </h2>
+                                <h3 class="mb-1">{{ $sales }}</h3>
                             </div>
                         </div>
                         <div class="col-12 col-xl-7 px-xl-0">
                             <div class="d-none d-sm-block">
                                 <h2 class="h6 text-gray-400 mb-0"> Products </h2>
-                                <h3 class="fw-extrabold mb-2">50.88</h3>
+                                <h3 class="fw-extrabold mb-2">{{ $products }}</h3>
                             </div>
                             {{-- <small class="text-gray-500">
                                 Feb 1 - Apr 1
@@ -201,7 +205,7 @@
 
     </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-6 col-xl-6">
 
             <div class="col-12 mb-4">
@@ -342,7 +346,38 @@
             </div>
         </div>
 
+    </div> --}}
+    <div class="">
+        <h1> Stock </h1>
     </div>
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th>No</th>
+                <th>Products Name</th>
+                <th>Products Code</th>
+                <th>Manufacturer</th>
+                <th>Reg No</th>
+                <th>Stock</th>
+
+            </tr>
+            @foreach ($stocks as $stock)
+                <tr>
+                    <td>{{ ++$i }}</td>
+                    <td>{{ $stock->name }}</td>
+                    <td>{{ $stock->product_code }}</td>
+                    <td>{{ $stock->manufacturer }}</td>
+                    <td>{{ $stock->reg_number }}</td>
+                    <td>{{ $stock->product_stock }}</td>
+
+
+                </tr>
+            @endforeach
+        </table>
+    </div>
+    {!! $stocks->links() !!}
+
+
 
 
     <script>

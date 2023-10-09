@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'BikeDesk'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,7 +54,12 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    // http://vintagemotors007.com/rax
+    // http://vintagemotors007.com
+
+    // 'url' => env('APP_URL', 'http://localhost'),
+    // 'url' => env('APP_URL', 'http://vintagemotors007.com/rax'),
+    'url' => env('APP_URL', 'http://vintagemotors007.com'),
 
     'asset_url' => env('ASSET_URL', null),
 
@@ -69,7 +74,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    // 'timezone' => 'UTC',
+    'timezone' => 'Asia/Dhaka',
 
     /*
     |--------------------------------------------------------------------------

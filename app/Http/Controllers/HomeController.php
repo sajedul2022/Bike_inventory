@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Rules\MatchOldPassword;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -27,7 +28,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $customers = DB::table('customers')->count();
+        $products = DB::table('products')->count();
+        $sales = DB::table('sales')->sum('sales_quantity');
+        $salesTotal = DB::table('sales')->sum('sales_total_amount');
+        $stocks =  DB::table('products')
+        ->join('stocks', 'products.id', '=', 'stocks.product_id')
+        ->select('products.id',  'products.name','products.product_code','products.manufacturer','products.reg_number', 'stocks.product_stock',)
+        ->latest('stocks.created_at')->paginate(20);
+        // ->get();
+
+        // return dd($salesTotal);
+
+        return view('home', compact('stocks','customers', 'products', 'sales', 'salesTotal' ))->with('i', (request()->input('page', 1) - 1) * 5);
+
+
     }
 
     // profile Manage
@@ -72,4 +87,12 @@ class HomeController extends Controller
         // dd('Password change successfully.');
         return back()->with('message', 'Password change successfully.');
     }
+
+    // home Aggregates  users = DB::table('users')->count();
+
+    // public function homeAggregates (){
+    //     users = DB::table('users')->count();
+    //     return view('home',);
+    // }
+
 }

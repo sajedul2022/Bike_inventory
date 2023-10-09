@@ -27,9 +27,10 @@
             <p class="">Date Of Birth: {{ isset($supplier[0]->dob) ? $supplier[0]->dob : null }} </p>
             <p class="">Address: {{ isset($supplier[0]->address) ? $supplier[0]->address : null }} </p>
             <p class="">NID NO: {{ isset($supplier[0]->nid) ? $supplier[0]->nid : null }} </p>
-            <p class="">NID Image: <img
-                    src="/images/{{ isset($supplier[0]->nid_image) ? $supplier[0]->nid_image : null }}" width="100px"
-                    alt="NID IMG"> </p>
+            {{-- <p class="">NID Image:
+                <img src="/images/{{ isset($supplier[0]->nid_image) ? $supplier[0]->nid_image : null }}" width="100px" alt="NID IMG">
+                <img src="{{ asset('images/'.isset($supplier[0]->nid_image) ? $supplier[0]->nid_image : null) }}" width="100px" alt="NID IMG">
+            </p> --}}
             <p class="">Mediator Name: {{ isset($supplier[0]->mediator_name) ? $supplier[0]->mediator_name : null }}
             </p>
             <p class="">Mediator Phone:
@@ -73,7 +74,7 @@
                 <p> Registration Date: {{ $product->reg_date }} </p>
                 <p> Cubic Capacity (CC): {{ $product->cubic_capacity }} </p>
 
-                <p> Image: <img src="/images/{{ $product->image }}" width="100px"> </p>
+                <p> Image: <img src="{{ asset('images/'.$product->image) }}" width="100px"> </p>
             </div>
 
         </div>
@@ -92,9 +93,10 @@
             <p class="">Date Of Birth: {{ isset($customer[0]->dob) ? $customer[0]->dob : null }} </p>
             <p class="">Address: {{ isset($customer[0]->address) ? $customer[0]->address : null }} </p>
             <p class="">NID NO: {{ isset($customer[0]->nid) ? $customer[0]->nid : null }} </p>
-            <p class="">NID Image: <img
-                    src="/images/{{ isset($customer[0]->nid_image) ? $customer[0]->nid_image : null }}" alt="NID IMG"
-                    width="100px"> </p>
+            {{-- <p class="">NID Image:
+                <img src="/images/{{ isset($customer[0]->nid_image) ? $customer[0]->nid_image : null }}" alt="NID IMG" width="100px" >
+                <img src="{{ asset('/images/'.isset($customer[0]->nid_image) ? $customer[0]->nid_image : null) }}" width="100px" alt="NID IMG">
+            </p> --}}
             <p class="">Mediator Name: {{ isset($customer[0]->mediator_name) ? $customer[0]->mediator_name : null }}
             </p>
             <p class="">Mediator Phone:

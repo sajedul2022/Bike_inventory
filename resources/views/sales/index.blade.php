@@ -37,7 +37,7 @@
                 <td>{{ $sale->sale_price }}</td>
                 <td>{{ $sale->sales_quantity }}</td>
                 <td>{{ $sale->sales_total_amount }}</td>
-                {{-- <td><img src="/images/{{ $product->image }}" width="80px"></td> --}}
+                {{-- <td><img src="{{ asset('images/'.$product->image) }}" width="80px"></td> --}}
                 <td>
                     <form action="{{ route('sales.destroy', $sale->id) }}" method="POST">
                         <a class="btn btn-info" href="{{ route('sales.show',$sale->id) }}">Invoice</a>

@@ -200,4 +200,10 @@ class SaleController extends Controller
     {
         //
     }
+
+    // saleReport
+
+    public function saleReport(){
+        
+    }
 }

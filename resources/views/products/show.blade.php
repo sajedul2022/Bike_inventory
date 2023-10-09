@@ -11,7 +11,7 @@
         </div>
     </div>
     <div class="row">
-        
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Product Name:</strong>
@@ -94,7 +94,8 @@
                         <strong>Image:</strong>
                         <input type="file" name="image" class="form-control" placeholder="image">
                         <br>
-                        <img src="/images/{{ $product->image }}" width="100px">
+                        <img src="{{ asset('images/'.$product->image) }}" width="100px">
+
                     </div>
                 </div>
 
