@@ -14,8 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     {{-- @vite(['resources/js/app.js']) --}}
-    <link rel="stylesheet" href="{{ asset('/resources/css/app.css') }}">
-    <script src="{{ asset('/resources/js/app.js') }}"></script>
+    {{-- <link rel="stylesheet" href="{{ asset('/resources/css/app.css') }}">
+    <script src="{{ asset('/resources/js/app.js') }}"></script> --}}
 
     {{-- bootstrap cdn  --}}
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"

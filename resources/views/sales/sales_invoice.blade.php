@@ -132,7 +132,7 @@
                     <div id="logo">
                         {{-- <img src="{{ asset('/images/250X80logo.png') }}"  alt="Logo" style="width: fit-content;"> --}}
                         {{-- <img src="/images/250X80logo.png"   alt="Logo"> --}}
-                        <h2>Vintag Motors</h2>
+                        <h2>Vintage Motors</h2>
                     </div>
                 </th>
                 <th width="50%" colspan="2" class="text-end company-data">

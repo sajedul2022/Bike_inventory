@@ -207,3 +207,6 @@ php artisan make:model saleInvoice -m
 
 
 vintagemotors007.com
+
+vintagemotors007@gmail.com
+$2y$10$5lVvkHAFUNKMHGhoQ3SPyO8C21yQLqBd5widKaJpwJJMcwwzxnFcO

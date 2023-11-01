@@ -69,58 +69,61 @@
 
 
                     <div class="box-body">
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                                <tr>
-                                    <th>S.No.</th>
-                                    <th>Category Name</th>
-                                    <th>Parent Control</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @if (isset($categories))
-                                    <?php $_SESSION['i'] = 0; ?>
-                                    @foreach ($categories as $category)
-                                        <?php $_SESSION['i'] = $_SESSION['i'] + 1; ?>
-                                        <tr>
-                                            <?php $dash = ''; ?>
-                                            <td>{{ $_SESSION['i'] }}</td>
-                                            <td>{{ $category->name }}</td>
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Category Name</th>
+                                        <th>Parent Control</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (isset($categories))
+                                        <?php $_SESSION['i'] = 0; ?>
+                                        @foreach ($categories as $category)
+                                            <?php $_SESSION['i'] = $_SESSION['i'] + 1; ?>
+                                            <tr>
+                                                <?php $dash = ''; ?>
+                                                <td>{{ $_SESSION['i'] }}</td>
+                                                <td>{{ $category->name }}</td>
 
-                                            <td>
-                                                @if (isset($category->parent_id))
-                                                    {{ $category->subcategory->name }}
-                                                @else
-                                                    None
-                                                @endif
-                                            </td>
+                                                <td>
+                                                    @if (isset($category->parent_id))
+                                                        {{ $category->subcategory->name }}
+                                                    @else
+                                                        None
+                                                    @endif
+                                                </td>
 
-                                            <td>
-                                                {{-- <a class="btn btn-primary"
+                                                <td>
+                                                    {{-- <a class="btn btn-primary"
                                                     href="{{ route('category.edit', $category->id) }}">Edit</a> --}}
 
-                                                <form action="{{ route('category.destroy', $category->id) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <a>
-                                                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                                                    </a>
-                                                </form>
-                                            </td>
+                                                    <form action="{{ route('category.destroy', $category->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <a>
+                                                            <button type="submit"
+                                                                class="btn btn-sm btn-danger">Delete</button>
+                                                        </a>
+                                                    </form>
+                                                </td>
 
-                                        </tr>
-                                        @if (count($category->subcategory))
-                                            @include('categories/sub-category-list', [
-                                                'subcategories' => $category->subcategory,
-                                            ])
-                                        @endif
-                                    @endforeach
-                                    <?php unset($_SESSION['i']); ?>
-                                @endif
-                            </tbody>
-                        </table>
+                                            </tr>
+                                            @if (count($category->subcategory))
+                                                @include('categories/sub-category-list', [
+                                                    'subcategories' => $category->subcategory,
+                                                ])
+                                            @endif
+                                        @endforeach
+                                        <?php unset($_SESSION['i']); ?>
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

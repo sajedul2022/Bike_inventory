@@ -1,23 +1,24 @@
 @extends('layouts.app')
 @section('title', 'All Products')
 @section('content')
-    <div class="row">
-        <div class="col-lg-12 margin-tb">
-            <div class="pull-left">
-                <h2>All Customers </h2>
-            </div>
-            <div class="pull-right">
-                @can('product-create')
-                <a class="btn btn-success" href="{{ route('customers.create') }}">  New Customers </a>
-                @endcan
-            </div>
+<div class="row">
+    <div class="col-lg-12 margin-tb">
+        <div class="pull-left">
+            <h2>All Customers </h2>
+        </div>
+        <div class="pull-right">
+            @can('product-create')
+            <a class="btn btn-success" href="{{ route('customers.create') }}"> New Customers </a>
+            @endcan
         </div>
     </div>
-    @if ($message = Session::get('success'))
-        <div class="alert alert-success">
-            <p>{{ $message }}</p>
-        </div>
-    @endif
+</div>
+@if ($message = Session::get('success'))
+<div class="alert alert-success">
+    <p>{{ $message }}</p>
+</div>
+@endif
+<div class="table-responsive">
     <table class="table table-bordered">
         <tr>
             <th>No</th>
@@ -49,6 +50,7 @@
         </tr>
         @endforeach
     </table>
-    {!! $customers->links() !!}
-    <p class="text-center text-primary"><small></small></p>
+</div>
+{!! $customers->links() !!}
+<p class="text-center text-primary"><small></small></p>
 @endsection

@@ -131,7 +131,6 @@ class PurchaseController extends Controller
             ]);
         }
 
-        // return redirect()->route('generate-pdf')
         return redirect()->route('purchase.index')
             ->with('success', 'Created successfully.');
     }
@@ -158,7 +157,6 @@ class PurchaseController extends Controller
 
         $pdf = FacadePdf::loadView('purchase.purchase_invoice', compact('purchases', 'suppliers', 'products'));
         return $pdf->stream('billing-invoice');
-
     }
 
     /**
@@ -169,7 +167,9 @@ class PurchaseController extends Controller
      */
     public function edit(purchase $purchase)
     {
-        //
+        $suppliers = Supplier::get();
+        $products = Product::get();
+        return view('purchase.edit', compact('purchase', 'suppliers', 'products'));
     }
 
     /**
@@ -181,7 +181,77 @@ class PurchaseController extends Controller
      */
     public function update(Request $request, purchase $purchase)
     {
-        //
+
+        $request->validate([
+            'supplier_id' => 'required',
+            'product_id' => 'required',
+            'purchase_quantity' => 'required',
+            'purchase_rate' => 'required',
+            // 'image'=>'required|image|mimes:jpeg,png,jpg,giv,svg|max:2048',
+        ]);
+
+        $input['supplier_id'] = $request->supplier_id;
+        $input['product_id'] = $request->product_id;
+        // $input['purchase_invoice_no'] = rand(100, 100000); time('His') date('Ymd').
+        $input['purchase_invoice_no'] = date('Ydis');
+        $input['purchase_quantity'] = $request->purchase_quantity;
+        $input['purchase_rate'] = $request->purchase_rate;
+        $input['purchase_amount'] = $input['purchase_rate'] * $input['purchase_quantity'];
+        $input['purchase_vat'] = $request->purchase_vat;
+        $input['purchase_discount'] = $request->purchase_discount;
+        $input['purchase_balance_due'] = $request->purchase_balance_due;
+        $input['purchase_amount_paid'] = $request->purchase_amount_paid;
+        $input['purchase_total_amount'] = $input['purchase_balance_due'] + $input['purchase_amount_paid'];
+        // $input['sale_price'] =  $request->sale_price;
+        $input['purchase_payment_type'] =  $request->purchase_payment_type;
+        $input['purchase_date'] =  $request->purchase_date;
+        $input['purchase_payment_status'] = 1;
+
+        // if ($image = $request->file('image')) {
+        //     $destinationPath = "images/";
+        //     $profileImage = date('YmdHis') . "." . $image->entOriginalExtension();
+        //     $image->move($destinationPath, $profileImage);
+        //     $input['image'] = "$profileImage";
+        // }
+        // $input['auth_id'] = Auth::id();
+        // $input['image'] = $image;
+
+
+        $purchase->update($input);
+
+
+        // stock table
+
+        $productID = $request->product_id;
+        $oldStockData  = DB::table('stocks')->where('product_id', '=', $productID)->select('id', 'product_id', 'product_stock')->get();
+        $oldID =  isset($oldStockData[0]->id) ? $oldStockData[0]->id : null;
+        $oldproductID =  isset($oldStockData[0]->product_id) ? $oldStockData[0]->product_id : null;
+        $oldStock =  isset($oldStockData[0]->product_stock) ? $oldStockData[0]->product_stock : null;
+        $InputStock = $request->purchase_quantity;
+        $UpdateStock = $oldStock + $InputStock;
+        $CheckID = $oldproductID == $productID;
+        // return dd($CheckID);
+
+        if ($CheckID == true) {
+
+            $stock = Stock::find($oldID);
+            $stock->update([
+                'product_id' => $request->product_id,
+                'product_stock' => $UpdateStock,
+                'stock_status' => 1,
+            ]);
+        } elseif ($CheckID == false) {
+
+            $stock = new Stock;
+            $stock->create([
+                'product_id' => $request->product_id,
+                'product_stock' => $request->purchase_quantity,
+                'stock_status' => 1,
+            ]);
+        }
+
+        return redirect()->route('purchase.index')
+            ->with('success', 'Update successfully.');
     }
 
     /**
@@ -194,9 +264,4 @@ class PurchaseController extends Controller
     {
         //
     }
-
-
-
-
-
 }

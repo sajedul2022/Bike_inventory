@@ -94,5 +94,15 @@ class HomeController extends Controller
     //     users = DB::table('users')->count();
     //     return view('home',);
     // }
+    
+    
+    public function cache(){
+        \Artisan::call('cache:clear');
+        \Artisan::call('route:clear');
+        \Artisan::call('config:clear');
+        \Artisan::call('view:clear');
+        return redirect()->back()->with('status','Cache Cleared!');
+}
+
 
 }

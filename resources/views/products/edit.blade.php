@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title', 'Products Edit')
 @section('content')
     <div class="row">
         <div class="col-lg-12 margin-tb">
@@ -104,14 +105,14 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Chassis Number:</strong>
-                    <input type="number" name="chassis_number"  value="{{ $product->chassis_number }}" class="form-control" placeholder="Chassis Number ">
+                    <input type="text" name="chassis_number"  value="{{ $product->chassis_number }}" class="form-control" placeholder="Chassis Number ">
                 </div>
             </div>
 
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Engine Number: </strong>
-                    <input type="number" name="engine_number"  value="{{ $product->engine_number }}" class="form-control" placeholder="Engine Number">
+                    <input type="text" name="engine_number"  value="{{ $product->engine_number }}" class="form-control" placeholder="Engine Number">
                 </div>
             </div>
 

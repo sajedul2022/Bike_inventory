@@ -46,12 +46,12 @@
 
                     <div class="col-xs-12 col-sm-12 col-md-12">
                         <div class="form-group">
-                            <label for="product_id"> Products </label>
+                            <label for="product_id"> Bike Reg. Number </label>
                             <select class="form-control" name="product_id" required>
                                 <option value="" disabled selected>Select</option>
                                 @if ($products)
                                     @foreach ($products as $product)
-                                        <option value="{{ $product->id }}"> {{ $product->name }} </option>
+                                        <option value="{{ $product->id }}"> {{ $product->reg_number }} </option>
                                     @endforeach
                                 @endif
                             </select>

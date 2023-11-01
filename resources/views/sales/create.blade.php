@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Create')
+@section('title', 'Create Sales')
 
 @section('content')
     <div class="row">
@@ -199,12 +199,12 @@
 
                             <div class="col-xs-6 col-sm-6 col-md-6">
                                 <div class="form-group">
-                                    <label for="product_id"> Products </label>
+                                    <label for="product_id"> Bike Reg. Number </label>
                                     <select class="form-control" id="product_id" name="product_id" required>
                                         <option value="" disabled selected>Select</option>
                                         @if ($products)
                                             @foreach ($products as $product)
-                                                <option value="{{ $product->id }}"> {{ $product->name }} </option>
+                                                <option value="{{ $product->id }}"> {{ $product->reg_number }} </option>
                                             @endforeach
                                         @endif
                                     </select>

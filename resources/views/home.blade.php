@@ -352,28 +352,26 @@
     </div>
     <div class="table-responsive">
         <table class="table table-bordered">
-            <tr>
-                <th>No</th>
-                <th>Products Name</th>
-                <th>Products Code</th>
-                <th>Manufacturer</th>
-                <th>Reg No</th>
-                <th>Stock</th>
+        <tr>
+            <th>No</th>
+            <th>Reg No</th>
+            <th>Manufacturer</th>
+            <th>Products Name</th>
+            <th>Stock</th>
 
-            </tr>
-            @foreach ($stocks as $stock)
-                <tr>
-                    <td>{{ ++$i }}</td>
-                    <td>{{ $stock->name }}</td>
-                    <td>{{ $stock->product_code }}</td>
-                    <td>{{ $stock->manufacturer }}</td>
-                    <td>{{ $stock->reg_number }}</td>
-                    <td>{{ $stock->product_stock }}</td>
+        </tr>
+        @foreach ($stocks as $stock)
+        <tr>
+            <td>{{ ++$i }}</td>
+             <td>{{ $stock->reg_number }}</td>
+            <td>{{ $stock->manufacturer }}</td>
+             <td>{{ $stock->name }}</td>
+            <td>{{ $stock->product_stock }}</td>
 
 
-                </tr>
-            @endforeach
-        </table>
+        </tr>
+        @endforeach
+         </table>
     </div>
     {!! $stocks->links() !!}
 

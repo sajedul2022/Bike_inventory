@@ -40,6 +40,7 @@ Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPass
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/clear-cache', [HomeController::class, 'cache'])->name('clear');
 
 
 Route::group(['middleware' => ['auth']], function () {

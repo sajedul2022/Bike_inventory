@@ -132,7 +132,7 @@
                     <div id="logo">
                         {{-- <img src="{{ asset('/images/250X80logo.png') }}"  alt="Logo" style="width: fit-content;"> --}}
                         {{-- <img src="/images/250X80logo.png"   alt="Logo"> --}}
-                        <h2>Vintag Motors</h2>
+                        <h2>Vintage Motors</h2>
                     </div>
                 </th>
                 <th width="50%" colspan="2" class="text-end company-data">
@@ -273,12 +273,12 @@
         </tbody>
     </table>
     <hr>
-    <p>
+    {{-- <p>
         <strong>Note:</strong>
         From today {{ date('Y-m-d') }}, All liability for the motorcycle will be borne by the buyer. The motorcycle was
         fully operational with blue-book, tax token, sale receipt and all the documents I understood the buyer. If the
         buyer does not transfer ownership of the motorcycle within 21 days, the authority will not be responsible.
-    </p>
+    </p> --}}
     <strong>Comment: </strong>
     <hr>
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Create')
+@section('title', 'Products Create')
 
 @section('content')
     <div class="row">
@@ -102,14 +102,14 @@
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Chassis Number:</strong>
-                    <input type="number" name="chassis_number" class="form-control" placeholder="Chassis Number ">
+                    <input type="text" name="chassis_number" class="form-control" placeholder="Chassis Number ">
                 </div>
             </div>
 
             <div class="col-xs-6 col-sm-6 col-md-6">
                 <div class="form-group">
                     <strong>Engine Number: </strong>
-                    <input type="number" name="engine_number" class="form-control" placeholder="Engine Number">
+                    <input type="text" name="engine_number" class="form-control" placeholder="Engine Number">
                 </div>
             </div>
 

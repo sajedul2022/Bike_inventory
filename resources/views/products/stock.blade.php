@@ -13,29 +13,29 @@
             <p>{{ $message }}</p>
         </div>
     @endif
-    <table class="table table-bordered">
+     <div class="table-responsive">
+        <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Products Name</th>
-            <th>Products Code</th>
-            <th>Manufacturer</th>
             <th>Reg No</th>
+            <th>Manufacturer</th>
+            <th>Products Name</th>
             <th>Stock</th>
 
         </tr>
         @foreach ($stocks as $stock)
         <tr>
             <td>{{ ++$i }}</td>
-            <td>{{ $stock->name }}</td>
-            <td>{{ $stock->product_code }}</td>
+             <td>{{ $stock->reg_number }}</td>
             <td>{{ $stock->manufacturer }}</td>
-            <td>{{ $stock->reg_number }}</td>
+             <td>{{ $stock->name }}</td>
             <td>{{ $stock->product_stock }}</td>
 
 
         </tr>
         @endforeach
-    </table>
+         </table>
+    </div>
     {!! $stocks->links() !!}
 
 @endsection
