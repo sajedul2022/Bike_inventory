@@ -15,9 +15,9 @@
             <!-- Navbar links -->
             <ul class="navbar-nav align-items-center">
                 {{-- <h4 class="mav_top_para">Bike Management Software  </h4> --}}
-                
+
                 <li><a class="" style="color:black" href="{{ route('clear') }}"> {{ __('Refresh') }} </a></li>
-                
+
                 <li class="nav-item dropdown ms-lg-3">
                     <a class="nav-link dropdown-toggle pt-1 px-0" href="#" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">

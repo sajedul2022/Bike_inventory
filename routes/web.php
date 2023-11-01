@@ -30,6 +30,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('mySillyPage', function () {
+    // abort with error 404
+    return abort('404');
+    // abort with error 403 (default error message)
+    // return abort('403');
+    // abort with error 403 (custom error message)
+    // return abort('403', 'My Silly Error');
+});
+
 // password Forget & reset
 
 Route::get('forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('forget.password.get');

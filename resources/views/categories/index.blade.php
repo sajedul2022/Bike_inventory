@@ -76,7 +76,7 @@
                                         <th>S.No.</th>
                                         <th>Category Name</th>
                                         <th>Parent Control</th>
-                                        <th>Action</th>
+                                        {{-- <th>Action</th> --}}
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,9 +97,10 @@
                                                     @endif
                                                 </td>
 
-                                                <td>
-                                                    {{-- <a class="btn btn-primary"
-                                                    href="{{ route('category.edit', $category->id) }}">Edit</a> --}}
+                                                {{-- <td>
+
+                                                    <a class="btn btn-primary"
+                                                        href="{{ route('category.edit', $category->id) }}">Edit</a>
 
                                                     <form action="{{ route('category.destroy', $category->id) }}"
                                                         method="POST">
@@ -110,7 +111,8 @@
                                                                 class="btn btn-sm btn-danger">Delete</button>
                                                         </a>
                                                     </form>
-                                                </td>
+
+                                                </td> --}}
 
                                             </tr>
                                             @if (count($category->subcategory))

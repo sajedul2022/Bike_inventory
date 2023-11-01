@@ -286,12 +286,12 @@
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products4' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('stock') }}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Stock Report </span>
                             </a>
-                        </li>
+                        </li> --}}
 
                         {{-- <li class="nav-item {{ Request::segment(1) == 'products' ? 'active' : '' }}">
                             <a class="nav-link" href="/products">
@@ -352,13 +352,13 @@
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('customer.due')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Customer Due Report
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </div>
@@ -396,13 +396,13 @@
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
+                        {{-- <li class="nav-item {{ Request::segment(1) == 'products2' ? 'active' : '' }}">
                             <a class="nav-link" href="{{ route('supplier.due')}}" >
                                 <i class='far fa-arrow-alt-circle-right me-2 'style='color:#0069fd'></i> <span
                                     class="sidebar-text"> Supplier Due Report
                                 </span>
                             </a>
-                        </li>
+                        </li> --}}
 
                     </ul>
                 </div>
